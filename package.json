@@ -1,0 +1,31 @@
+{
+  "name": "connector-utils",
+  "version": "3.0.3",
+  "engines": {
+    "node": "14.18.1"
+  },
+  "private": true,
+  "dependencies": {
+    "nconf": "0.11.2",
+    "async": "1.4.2",
+    "lodash": "4.17.15",
+    "request": "2.86.0",
+    "lodash.findwhere": "3.1.0",
+    "flat": "5.0.2",
+    "winston": "2.2.0",
+    "handlebars": "4.5.1",
+    "fs": "0.0.2",
+    "semver-compare": "1.0.0",
+    "path": "0.12.7",
+    "jsonpath": "1.0.0",
+    "moment": "2.19.3"
+  },
+  "devDependencies": {
+    "mocha": "9.2.0",
+    "nock": "10.0.6",
+    "istanbul": "0.4.5",
+    "assert": "1.5.0",
+    "mockery": "2.1.0",
+    "sinon": "1.17.7"
+  }
+}
