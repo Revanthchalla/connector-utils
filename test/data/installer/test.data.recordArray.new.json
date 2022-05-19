@@ -1,0 +1,101 @@
+{
+    "general-sync": {
+        "name": "general-sync",
+        "edition": [
+            "premium",
+            "enterprise"
+        ],
+        "resolved": true,
+        "filelocation": "bigcommerceData/sections/general-sync.json",
+        "info": {
+            "data": [{
+                "title": "General",
+                "columns": 1
+            }]
+        },
+        "isLoaded": true,
+        "dependencyVerified": true
+    },
+    "bigcommerce-save-integration": {
+        "name": "bigcommerce-save-integration",
+        "includeToUpgrade": true,
+        "dependson": [
+            "general-sync"
+        ],
+        "filelocation": "bigcommerceData/integrations/bigcommerce-save-integration.json",
+        "info": {
+            "data": {
+                "_id": "integrationId",
+                "lastModified": "2017-04-19T12:03:36.625Z",
+                "name": "BigCommerce - NetSuite Connector",
+                "mode": "settings",
+                "settings": {
+                    
+                    "sections": [
+                        {
+                            "flows": [
+                                {
+                                    "showSchedule": true,
+                                    "showMapping": true,
+                                    "_id": "flowid"
+                                }
+                            ],
+                            "columns": 1,
+                            "title": "General"
+                        }
+                    ]
+                },
+                "version": "1.2.0"
+            },
+            "resourcetype": "integrations",
+            "jsonpath": [
+                {
+                    "record": "bigcommerceintegration-load",
+                    "readfrom": "$",
+                    "writeto": "$"
+                },
+                {
+                    "record": "general-sync",
+                    "readfrom": [
+                        {
+                            "readfrom": "$",
+                            "record": "general-sync"
+                        }
+                    ],
+                    "writeto": "sections",
+                    "writetopath": "$.settings",
+                    "position": "0",
+                    "removeAll": true,
+                    "isArrayMergeable": true
+                }
+            ],
+            "bearerToken": "ottb6793cf8bee14c9688b80bca6d3445c6",
+            "response": {
+                "_id": "integrationId",
+                "lastModified": "2017-04-19T12:03:36.625Z",
+                "name": "BigCommerce - NetSuite Connector",
+                "mode": "settings",
+                "settings": {
+                    
+                    "sections": [
+                        {
+                            "flows": [
+                                {
+                                    "showSchedule": true,
+                                    "showMapping": true,
+                                    "_id": "flowid"
+                                }
+                            ],
+                            "columns": 1,
+                            "title": "General"
+                        }
+                    ]
+                },
+                "version": "1.2.0"
+            }
+        },
+        "isLoaded": true,
+        "dependencyVerified": true,
+        "resolved": true
+    }
+}

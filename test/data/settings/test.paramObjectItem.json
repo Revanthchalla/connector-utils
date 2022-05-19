@@ -1,0 +1,84 @@
+{
+	"oldSettings": {
+		"exports_5a1fd624b2976b3ec85fb44c_savedSearch_listSavedSearches": {
+			"name": "exports_5a1fd624b2976b3ec85fb44c_savedSearch_listSavedSearches",
+			"value": "161008",
+			"required": true,
+			"label": "NetSuite Saved Search for syncing item details"
+		},
+		"exports_5a1fd624b2976b3ec85fb44c_updateSearchPricingFilters_listPriceLevels": {
+			"name": "exports_5a1fd624b2976b3ec85fb44c_updateSearchPricingFilters_listPriceLevels",
+			"value": "2"
+		},
+		"exports_5a1fd624b2976b3ec85fb44c_updateSearchCurrencyFilters_listCurrency": {
+			"name": "exports_5a1fd624b2976b3ec85fb44c_updateSearchCurrencyFilters_listCurrency",
+			"value": null
+		},
+		"exports_5a1fd624b2976b3ec85fb44c_bgcUpdateItemSearchesTypeFilters": {
+			"label": "Enable virtual variations",
+			"value": false,
+			"name": "exports_5a1fd624b2976b3ec85fb44c_bgcUpdateItemSearchesTypeFilters"
+		},
+		"exports_5a1fd624b2976b3ec85fb44c_bgcVariationParentIdentifier": {
+			"name": "exports_5a1fd624b2976b3ec85fb44c_bgcVariationParentIdentifier",
+			"value": "parent"
+		}
+	},
+	"newSettings": {
+		"exports_5a1fd624b2976b3ec85fb44c_bgcUpdateItemSearchesTypeFilters": true
+	},
+	"setting": "exports_5a1fd624b2976b3ec85fb44c_bgcUpdateItemSearchesTypeFilters",
+	"options": {
+		"pending": {
+			"jxq9ozcl": {
+				"exports_5a1fd624b2976b3ec85fb44c_savedSearch_listSavedSearches": "161008",
+				"exports_5a1fd624b2976b3ec85fb44c_updateSearchPricingFilters_listPriceLevels": "2",
+				"exports_5a1fd624b2976b3ec85fb44c_updateSearchCurrencyFilters_listCurrency": null,
+				"exports_5a1fd624b2976b3ec85fb44c_bgcUpdateItemSearchesTypeFilters": true,
+				"exports_5a1fd624b2976b3ec85fb44c_bgcVariationParentIdentifier": "parent"
+			}
+		},
+		"_integrationId": "5a1fd4f1b2976b3ec85fb423",
+		"bearerToken": "ottf9f9f294dc2b4c7ea0d23e37a11af483",
+		"integrationRecord": {
+			"_id": "5a1fd4f1b2976b3ec85fb423",
+			"lastModified": "2017-12-06T15:19:19.747Z",
+			"name": "BigCommerce - NetSuite Connector",
+			"_connectorId": "59e7277b4f6dd93b4c6249d1",
+			"mode": "settings",
+			"settings": {
+				"commonresources": {
+					"netsuiteConnectionId": "5a1fd4f1b2976b3ec85fb425",
+					"nsUtilImportAdaptorId": "5a1fd4f2b2976b3ec85fb427",
+					"nsUtilImportAdaptorApiIdentifier": "ic4aa6fabc"
+				},
+				"storemap": [{
+						"productIdsExportId": "5a1fd624b2976b3ec85fb44e",
+						"massUpdateImportAdaptorId": "5a1fd555b2976b3ec85fb42d",
+						"shopname": "Product Team",
+						"email": "sandeepkumar.srivastava@celigo.com",
+						"imports": [null, "5a1fd555b2976b3ec85fb434", "5a1fd557b2976b3ec85fb43c", "5a1fd555b2976b3ec85fb42f", "5a1fd555b2976b3ec85fb42e", "5a1fd555b2976b3ec85fb433", "5a1fd555b2976b3ec85fb42d", "5a1fd555b2976b3ec85fb431", "5a1fd555b2976b3ec85fb436", "5a1fd624b2976b3ec85fb44f", "5a1fd624b2976b3ec85fb44b", "5a1fd624b2976b3ec85fb44a"],
+						"exports": [null, "5a1fd555b2976b3ec85fb432", "5a1fd555b2976b3ec85fb430", "5a1fd556b2976b3ec85fb439", "5a1fd55fb2976b3ec85fb43f", "5a1fd55fb2976b3ec85fb440", "5a1fd55fb2976b3ec85fb441", "5a1fd555b2976b3ec85fb435", "5a1fd555b2976b3ec85fb437", "5a1fd555b2976b3ec85fb438", "5a1fd55fb2976b3ec85fb442", "5a1fd55fb2976b3ec85fb447", "5a1fd624b2976b3ec85fb44d", "5a1fd624b2976b3ec85fb44c", "5a1fd624b2976b3ec85fb44e", "5a1fd62ab2976b3ec85fb453"],
+						"flows": [null, "5a1fd557b2976b3ec85fb43b", "5a1fd55fb2976b3ec85fb43e", "5a1fd55fb2976b3ec85fb443", "5a1fd55fb2976b3ec85fb444", "5a1fd55fb2976b3ec85fb445", "5a1fd557b2976b3ec85fb43d", "5a1fd557b2976b3ec85fb43a", "5a1fd55fb2976b3ec85fb446", "5a1fd55fb2976b3ec85fb448", "5a1fd625b2976b3ec85fb451", "5a1fd625b2976b3ec85fb450", "5a1fd625b2976b3ec85fb452", "5a1fd62ab2976b3ec85fb454"],
+						"savedSeaches": [null, "160608", "160508", "161107", "161008", "160908", "161108"],
+						"bigcommerceConnection": "5a1fd4f2b2976b3ec85fb426",
+						"shopInstallComplete": "true",
+						"apiIdentifierCustomerImport": "ie6ae2011a",
+						"genericExportApiIdentifier": "e080cb5e0a",
+						"productVariantsExportApiIdentifier": "e1aa7157cc",
+						"shopid": "jxq9ozcl"
+					}
+				],
+				"sections": [{}],
+				"supportsMultiStore": true,
+				"storeLabel": "BigCommerce Store",
+				"connectorEdition": "premium"
+			},
+			"version": "1.5.0"
+		},
+		"shopId": "jxq9ozcl"
+	},
+	"settingParams": ["exports", "5a1fd624b2976b3ec85fb44c", "updateItemSearchesTypeFilters"],
+	"virtualVariationIdentifierSettingKey": "_bgcVariationParentIdentifier",
+	"virtualVariationCheckboxSettingKey": "_bgcUpdateItemSearchesTypeFilters"
+}

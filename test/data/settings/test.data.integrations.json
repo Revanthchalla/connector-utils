@@ -1,0 +1,219 @@
+{
+    "_id": "56b89bdd2c274b101c8ebd7e",
+    "lastModified": "2016-02-24T13:12:33.959Z",
+    "name": "Shopify Connector for NetSuite",
+    "_connectorId": "55b9eb6ff9674dbc1300000d",
+    "install": [
+        {
+            "name": "Add New Store",
+            "description": "Configure new Shopify store credentials",
+            "imageURL": "/images/company-logos/Shopify.png",
+            "completed": true,
+            "installerFunction": "addNewStore",
+            "uninstallerFunction": "deleteNewStore"
+        },
+        {
+            "name": "Shopify Bundle",
+            "description": "Install Shopify Bundle in NetSuite",
+            "imageURL": "/images/company-logos/netsuite.png",
+            "installURL": "",
+            "completed": true,
+            "installerFunction": "verifyShopifyBundleInstallation",
+            "uninstallerFunction": "uninstallVerifyShopifyBundle"
+        }
+    ],
+    "mode": "settings",
+    "settings": {
+        "commonresources": {
+            "netsuiteConnectionId": "connectionId",
+            "nsUtilImportAdaptorId": "56b89bdd2c274b101c8ebd86",
+            "nsUtilImportAdaptorApiIdentifier": "i2cd339305"
+        },
+        "storemap": [
+            {
+                "shopname": "Store-US",
+                "email": "tarunzweb@gmail.com",
+                "imports": [
+                    null,
+                    "56b89c4f2c274b101c8ebd91",
+                    "56b89c4f2c274b101c8ebd90",
+                    "56b89c4f2c274b101c8ebd95",
+                    "56b89c4f2c274b101c8ebd8f",
+                    "56b89c4f2c274b101c8ebd93",
+                    "importId"
+                ],
+                "exports": [
+                    null,
+                    "exportId",
+                    "56b89c4f2c274b101c8ebd8c",
+                    "56b89c502c274b101c8ebd96",
+                    "56b89c4f2c274b101c8ebd94",
+                    "exportId"
+                ],
+                "flows": [
+                    null,
+                    "flowId",
+                    "56b89c572c274b101c8ebd9a",
+                    "56b89c572c274b101c8ebd98",
+                    "flowId",
+                    "56b89c602c274b101c8ebd9c"
+                ],
+                "shopifyConnection": "56b89bdd2c274b101c8ebd80",
+                "shopInstallComplete": "true",
+                "getStoreDetailsApiIdentifier": "e2a2105e4e",
+                "shopid": "8127949",
+                "apiIdentifierCustomerImport": "ie1a152255",
+                "webhookRegisterApiIdentifier": "i587b34087",
+                "variantImportApiIdentifier": "id30cfcbe6",
+                "webhookDeleteApiIdentifier": "id5b4398ea",
+                "orderWebhookId": 225539271
+            }
+        ],
+        "sections": [
+            {
+                "title": "Order Sync",
+                "columns": 1,
+                "flows": [
+                    {
+                        "_id": "flowId",
+                        "showMapping": true,
+                        "showSchedule": false,
+                        "settings": [
+                            {
+                                "name": "flows_flowId_enable",
+                                "value": "test"
+                            }
+                        ]
+                    },
+                    {
+                        "_id": "56b89c572c274b101c8ebd98",
+                        "showMapping": true,
+                        "showSchedule": false,
+                        "sliderInput": false
+                    },
+                    {
+                        "_id": "flowId",
+                        "showMapping": true,
+                        "showSchedule": false
+                    }
+                ],
+                "fields": [
+                    {
+                        "label": "Enable adding NetSuite fulfillments as Shopify fulfillments",
+                        "type": "checkbox",
+                        "name": "flows_flowId_enable",
+                        "value": false
+                    },
+                    {
+                        "label": "Enable adding Shopify orders as NetSuite orders",
+                        "type": "checkbox",
+                        "name": "flows_flowId_toggleWebhook",
+                        "value": true
+                    },
+                    {
+                        "label": "Add web orders into NetSuite",
+                        "value": "authorize",
+                        "type": "select",
+                        "name": "exports_exportId_registerWebhook",
+                        "required": true,
+                        "options": [
+                            [
+                                "authorize",
+                                "When they are Authorized in Shopify"
+                            ],
+                            [
+                                "capture",
+                                "When they are Captured in Shopify"
+                            ]
+                        ]
+                    },
+                    {
+                        "label": "Add web orders into NetSuite",
+                        "value": "authorize",
+                        "type": "select",
+                        "name": "exports_exportId_setFieldValues",
+                        "required": true,
+                        "options": [
+                            [
+                                "authorize",
+                                "When they are Authorized in Shopify"
+                            ],
+                            [
+                                "capture",
+                                "When they are Captured in Shopify"
+                            ]
+                        ]
+                    },
+                    {
+                        "map": {
+                            "fedex": "4"
+                        },
+                        "generates": [
+                            {
+                                "text": "Airborne",
+                                "id": "2"
+                            },
+                            {
+                                "text": "FedEx",
+                                "id": "3"
+                            },
+                            {
+                                "text": "UPS",
+                                "id": "4"
+                            }
+                        ],
+                        "default": "4",
+                        "allowFailures": true,
+                        "supportsGeneratesRefresh": true,
+                        "supportsExtractsRefresh": false,
+                        "generateFieldHeader": "NetSuite Ship Method",
+                        "extractFieldHeader": "Magento 2 Ship Method",
+                        "label": "Ship Method Mapping",
+                        "tooltip": "Lets you map the shipping methods between Magento 2 and NetSuite. You can also provide a default value in case no match is found.",
+                        "title": "Map Ship Methods",
+                        "name": "imports_importId_shipmethodLookup_dummyExtractsMethod_listShipMethods",
+                        "type": "staticMapWidget"
+                    }
+                ]
+            },
+            {
+                "title": "Inventory Sync",
+                "columns": 1,
+                "flows": [
+                    {
+                        "_id": "56b89c602c274b101c8ebd9c",
+                        "showMapping": false,
+                        "showSchedule": true
+                    },
+                    {
+                        "_id": "56b89c572c274b101c8ebd9a",
+                        "showMapping": false,
+                        "showSchedule": true
+                    }
+                ],
+                "fields": [
+                    {
+                        "label": "Enable updating NetSuite inventory levels in Shopify",
+                        "type": "checkbox",
+                        "name": "flows_56b89c602c274b101c8ebd9c_enable",
+                        "value": false
+                    },
+                    {
+                        "label": "NetSuite Saved Search for syncing inventory levels",
+                        "value": "customsearch16085",
+                        "type": "select",
+                        "name": "exports_exportId_savedSearch_refreshItemSeaches",
+                        "supportsRefresh": true,
+                        "options": [
+                            [
+                                "customsearch16085",
+                                "Celigo Shopify Inventory Export [Store-US] Store"
+                            ]
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "version": "1.1.0"
+}

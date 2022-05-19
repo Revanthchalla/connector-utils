@@ -1,0 +1,1663 @@
+{
+	"bigcommerceintegration-load": {
+		"filelocation": "bigcommerceData/integrations/bigcommerceintegration-load.json",
+		"dependson": ["state"],
+		"includeToUpgrade": true,
+		"info": {
+			"resourcetype": "integrations",
+			"method": "GET",
+			"jsonpath": [{
+				"record": "state",
+				"readfrom": [{
+					"readfrom": "_integrationId",
+					"record": "state"
+				}],
+				"writeto": "_id"
+			}],
+			"bearerToken": "bearerToken",
+			"id": "integrationId",
+			"response": {
+				"_id": "integrationId",
+				"lastModified": "2016-12-14T05:28:21.209Z",
+				"name": "BigCommerce - NetSuite Connector",
+				"_connectorId": "5811cf7018593a3064647fe4",
+				"install": [{
+					"name": "NetSuite Connection",
+					"description": "Configure NetSuite account credentials",
+					"imageURL": "/images/company-logos/netsuite.png",
+					"completed": true,
+					"installerFunction": "verifyNetSuiteConnection",
+					"uninstallerFunction": "deleteNetSuiteConnection",
+					"_connectionId": "5850d80aff431268c882d27e"
+				},
+				{
+					"name": "BigCommerce Connection",
+					"description": "Configure BigCommerce store credentials",
+					"imageURL": "/images/company-logos/BigCommerce.png",
+					"completed": true,
+					"installerFunction": "verifyBigCommerceConnection",
+					"uninstallerFunction": "deleteBigCommerceConnection",
+					"_connectionId": "5850d80aff431268c882d27f"
+				},
+				{
+					"name": "Integrator Bundle",
+					"description": "Install Integrator Bundle in NetSuite",
+					"imageURL": "/images/company-logos/netsuite.png",
+					"installURL": "https://system.na1.netsuite.com/app/bundler/bundledetails.nl?sourcecompanyid=TSTDRV916910&domain=PRODUCTION&config=F&id=20038",
+					"completed": true,
+					"installerFunction": "verifyIntegratorBundleInstallation",
+					"uninstallerFunction": "uninstallVerifyIntegratorBundle"
+				},
+				{
+					"name": "BigCommerce Bundle",
+					"description": "Install BigCommerce Bundle in NetSuite",
+					"imageURL": "/images/company-logos/netsuite.png",
+					"installURL": "https://system.na1.netsuite.com/app/bundler/bundledetails.nl?sourcecompanyid=TSTDRV916910&domain=PRODUCTION&config=F&id=119235",
+					"completed": true,
+					"installerFunction": "verifyBigCommerceBundleInstallation",
+					"uninstallerFunction": "uninstallVerifyBigCommerceBundle"
+				}],
+				"mode": "settings",
+				"settings": {
+					"commonresources": {
+						"netsuiteConnectionId": "5850d80aff431268c882d27e",
+						"bigcommerceConnectionId": "5850d80aff431268c882d27f",
+						"shopInstallComplete": "true",
+						"apiIdentifierCustomerImport": "i4705a4000",
+						"genericExportApiIdentifier": "e72adb2f41"
+					},
+					"sections": [{
+						"title": "Order",
+						"columns": 1,
+						"flows": [{
+							"_id": "5850d872ff431268c882d292",
+							"showMapping": true,
+							"showSchedule": true
+						},
+						{
+							"_id": "5850d872ff431268c882d291",
+							"showMapping": true,
+							"showSchedule": false,
+							"disableSlider": true
+						}],
+						"fields": [{
+							"label": "Add BigCommerce orders with status",
+							"value": "11",
+							"type": "select",
+							"tooltip": "Lets you define the order status in BigCommerce for which the orders should be imported into NetSuite.",
+							"name": "exports_5850d865ff431268c882d287_changeOrderFilterStatus",
+							"required": true,
+							"options": [["7",
+							"Awaiting Payment"],
+							["11",
+							"Awaiting Fulfillment"],
+							["9",
+							"Awaiting Shipment"],
+							["8",
+							"Awaiting Pickup"],
+							["3",
+							"Partially Shipped"],
+							["10",
+							"Completed"],
+							["2",
+							"Shipped"],
+							["5",
+							"Cancelled"],
+							["6",
+							"Declined"],
+							["4",
+							"Refunded"],
+							["13",
+							"Disputed"],
+							["12",
+							"Verification Required"]]
+						},
+						{
+							"label": "Add orders created after",
+							"type": "datetime",
+							"tooltip": "Lets you define the order creation date in BigCommerce only after which the orders should be imported into NetSuite.",
+							"name": "exports_5850d865ff431268c882d287_setStartDateOnDeltaBasedExports",
+							"value": null
+						},
+						{
+							"label": "NetSuite discount item to track BigCommerce discounts",
+							"value": "",
+							"type": "select",
+							"name": "imports_5850d865ff431268c882d286_saveDefaultDiscountItem_listDiscountItems",
+							"supportsRefresh": true,
+							"tooltip": "Lets you choose the corresponding NetSuite item to track discount amounts on your BigCommerce orders. Discount Code used on the BigCommerce order is mapped to the 'BigCommerce Discount Code' field under 'eTail' tab on the Sales Order record in NetSuite.",
+							"options": [null]
+						},
+						{
+							"label": "Trim customer name if invalid on BigCommerce order",
+							"type": "checkbox",
+							"tooltip": "Lets you define a business rule where invalid first name & last name on BigCommerce order are automatically trimmed to first 32 characters before the order is added to NetSuite. This prevents order import failures when the buyer enters more than 32 char for first name and/or last name fields in BigCommerce.",
+							"name": "imports_5850d865ff431268c882d289_trimName",
+							"value": false
+						},
+						{
+							"label": "Remove phone number if invalid on BigCommerce order",
+							"type": "checkbox",
+							"tooltip": "Lets you define a business rule where invalid phone numbers on BigCommerce order are automatically removed before the order is added to NetSuite. This prevents any manual intervention to import orders with invalid phone no.s (<7 digits or alphanumeric format).",
+							"name": "imports_5850d865ff431268c882d286_removeInvalidPhoneNumber",
+							"value": false
+						}]
+					},
+					{
+						"title": "Fulfillment",
+						"columns": 1,
+						"flows": [{
+							"_id": "5850d872ff431268c882d293",
+							"showMapping": true,
+							"showSchedule": true
+						}],
+						"fields": [{
+							"label": "NetSuite Saved Search for syncing item fulfillments",
+							"required": true,
+							"value": null,
+							"type": "select",
+							"name": "exports_5850d86aff431268c882d28f_savedSearch_listSavedSearches",
+							"supportsRefresh": true,
+							"options": [[null,
+							"Celigo BigCommerce Fulfillment Export Search"]]
+						}]
+					},
+					{
+						"title": "Inventory",
+						"columns": 1,
+						"flows": [{
+							"_id": "5850d872ff431268c882d294",
+							"showMapping": true,
+							"showSchedule": true
+						},
+						{
+							"_id": "5850d872ff431268c882d295",
+							"showMapping": true,
+							"showSchedule": true
+						}],
+						"fields": [{
+							"label": "NetSuite Saved Search for syncing inventory levels",
+							"required": true,
+							"value": null,
+							"type": "select",
+							"name": "exports_5850d86aff431268c882d290_savedSearch_listSavedSearches",
+							"supportsRefresh": true,
+							"options": [[null,
+							"Celigo BigCommerce Inventory Export Search"]]
+						},
+						{
+							"value": false,
+							"name": "exports_5850d86aff431268c882d290_toggleNetsuiteExportType_lastquantityavailablechange",
+							"type": "checkbox",
+							"tooltip": "Enabling this setting allows you to sync the inventory levels for all the NetSuite items (linked to your BigCommerce store) on each run of the inventory export data flow.",
+							"label": "Always sync inventory levels for entire catalog"
+						},
+						{
+							"options": [null],
+							"supportsRefresh": true,
+							"required": false,
+							"type": "multiselect",
+							"label": "NetSuite locations to pick inventory from",
+							"name": "exports_5850d86aff431268c882d290_updateSearchLocationFilters_listLocations",
+							"tooltip": "Lets you choose the inventory location(s) in NetSuite from which the inventory quantities should be read & exported to BigCommerce."
+						}]
+					}],
+					"connectorEdition": "standard"
+				},
+				"version": "1.0.2"
+			}
+		},
+		"isLoaded": true,
+		"dependencyVerified": true,
+		"resolved": true
+	},
+	"export-item": {
+		"dependson": ["state",
+		"bigcommerceintegration-load",
+		"nsConnectorUtil-copy-itemExport-savedsearch"],
+		"edition": ["premium"],
+		"filelocation": "bigcommerceData/exports/item.json",
+		"info": {
+			"data": {
+				"name": "netsuite-bigcommerce-item-delta-exportadaptor",
+				"asynchronous": true,
+				"type": "delta",
+				"preserveOrder": false,
+				"sampleData": [{
+					"id": "",
+					"recordType": "inventoryitem",
+					"Display Name": "",
+					"Sales Description": "",
+					"Product Id": "",
+					"Sku": "",
+					"Custom Url": "",
+					"Price": "",
+					"Weight": "",
+					"Categories": []
+				}],
+				"delta": {
+					"dateField": "lastmodifieddate"
+				},
+				"netsuite": {
+					"type": "restlet",
+					"skipGrouping": false,
+					"statsOnly": false,
+					"restlet": {
+						"recordType": "item",
+						"searchId": "",
+						"hooks": {
+							"batchSize": 20,
+							"preSend": {
+								"fileInternalId": null,
+								"function": "bigcommerceItemExportPreSendHook"
+							}
+						}
+					}
+				},
+				"_connectionId": "5850d80aff431268c882d27e"
+			},
+			"resourcetype": "exports",
+			"jsonpath": [{
+				"record": "bigcommerceintegration-load",
+				"readfrom": [{
+					"readfrom": "$.settings.commonresources.netsuiteConnectionId",
+					"record": "bigcommerceintegration-load"
+				}],
+				"writeto": "_connectionId"
+			},
+			{
+				"record": "nsConnectorUtil-copy-itemExport-savedsearch",
+				"readfrom": "$[0].searchId",
+				"writeto": "searchId",
+				"writetopath": "$.netsuite.restlet"
+			}],
+			"bearerToken": "bearerToken",
+			"response": {
+				"_id": "5850eb82659aee20b8704df0",
+				"lastModified": "2016-12-14T06:49:39.093Z",
+				"name": "netsuite-bigcommerce-item-delta-exportadaptor",
+				"_connectionId": "5850d80aff431268c882d27e",
+				"_integrationId": "integrationId",
+				"_connectorId": "5811cf7018593a3064647fe4",
+				"apiIdentifier": "apiIdentifier",
+				"asynchronous": true,
+				"type": "delta",
+				"sampleData": [{
+					"Categories": [],
+					"Weight": "",
+					"Price": "",
+					"Custom Url": "",
+					"Sku": "",
+					"Product Id": "",
+					"Sales Description": "",
+					"Display Name": "",
+					"recordType": "inventoryitem",
+					"id": ""
+				}],
+				"delta": {
+					"dateField": "lastmodifieddate"
+				},
+				"netsuite": {
+					"type": "restlet",
+					"skipGrouping": false,
+					"statsOnly": false,
+					"restlet": {
+						"recordType": "item",
+						"hooks": {
+							"batchSize": 20,
+							"preSend": {
+								"fileInternalId": null,
+								"function": "bigcommerceItemExportPreSendHook"
+							}
+						}
+					}
+				}
+			}
+		},
+		"isLoaded": true,
+		"dependencyVerified": true,
+		"resolved": true
+	},
+	"import-item": {
+		"dependson": ["state",
+		"bigcommerceintegration-load"],
+		"edition": ["premium"],
+		"filelocation": "bigcommerceData/imports/item.json",
+		"info": {
+			"data": {
+				"name": "bigcommerce-netsuite-importadaptor",
+				"sampleData": {
+					"name": "",
+					"type": "physical",
+					"sku": "",
+					"description": "",
+					"price": "",
+					"is_visible": true,
+					"weight": "",
+					"categories": [],
+					"availability": "available",
+					"custom_url": "",
+					"variant": [],
+					"inventory_tracking": ""
+				},
+				"distributed": false,
+				"hooks": {
+					"postSubmit": {
+						"function": "bigcommerceItemExportPostSubmitHook"
+					},
+					"postMap": {
+						"function": "bigcommerceItemExportPostMapHook"
+					}
+				},
+				"mapping": {
+					"fields": [{
+						"extract": "[Display Name]",
+						"generate": "name"
+					},
+					{
+						"extract": "Sku",
+						"generate": "sku"
+					},
+					{
+						"extract": "Categories",
+						"generate": "categories"
+					},
+					{
+						"generate": "type",
+						"hardCodedValue": "physical"
+					},
+					{
+						"generate": "availability",
+						"hardCodedValue": "available"
+					},
+					{
+						"extract": "Weight",
+						"generate": "weight"
+					},
+					{
+						"extract": "[Sales Description]",
+						"generate": "description"
+					},
+					{
+						"extract": "[Custom Url]",
+						"generate": "custom_url"
+					},
+					{
+						"extract": "Price",
+						"generate": "price"
+					},
+					{
+						"extract": "Inventory Tracking",
+						"generate": "inventory_tracking"
+					},
+					{
+						"extract": "variants",
+						"generate": "variants"
+					},
+					{
+						"generate": "is_visible",
+						"hardCodedValue": "true",
+						"dataType": "boolean"
+					}]
+				},
+				"rest": {
+					"relativeURI": ["/v3/catalog/products/{{{[Product Id]}}}",
+					"/v3/catalog/products"],
+					"method": ["PUT",
+					"POST"],
+					"headers": [],
+					"lookups": []
+				},
+				"_connectionId": "5850d80aff431268c882d27f"
+			},
+			"resourcetype": "imports",
+			"jsonpath": [{
+				"record": "bigcommerceintegration-load",
+				"readfrom": [{
+					"readfrom": "$.settings.commonresources.bigcommerceConnectionId",
+					"record": "bigcommerceintegration-load"
+				}],
+				"writeto": "_connectionId"
+			}],
+			"bearerToken": "bearerToken",
+			"response": {
+				"_id": "5850eb82659aee20b8704df1",
+				"lastModified": "2016-12-14T06:49:39.097Z",
+				"name": "bigcommerce-netsuite-importadaptor",
+				"sampleData": {
+					"inventory_tracking": "",
+					"variant": [],
+					"custom_url": "",
+					"availability": "available",
+					"categories": [],
+					"weight": "",
+					"is_visible": true,
+					"price": "",
+					"description": "",
+					"sku": "",
+					"type": "physical",
+					"name": ""
+				},
+				"_connectionId": "5850d80aff431268c882d27f",
+				"_integrationId": "integrationId",
+				"_connectorId": "5811cf7018593a3064647fe4",
+				"distributed": false,
+				"apiIdentifier": "i58d8c7032",
+				"hooks": {
+					"postSubmit": {
+						"function": "bigcommerceItemExportPostSubmitHook",
+						"_stackId": null
+					},
+					"postMap": {
+						"function": "bigcommerceItemExportPostMapHook",
+						"_stackId": null
+					}
+				},
+				"mapping": {
+					"fields": [{
+						"extract": "[Display Name]",
+						"generate": "name"
+					},
+					{
+						"extract": "Sku",
+						"generate": "sku"
+					},
+					{
+						"extract": "Categories",
+						"generate": "categories"
+					},
+					{
+						"generate": "type",
+						"hardCodedValue": "physical"
+					},
+					{
+						"generate": "availability",
+						"hardCodedValue": "available"
+					},
+					{
+						"extract": "Weight",
+						"generate": "weight"
+					},
+					{
+						"extract": "[Sales Description]",
+						"generate": "description"
+					},
+					{
+						"extract": "[Custom Url]",
+						"generate": "custom_url"
+					},
+					{
+						"extract": "Price",
+						"generate": "price"
+					},
+					{
+						"extract": "Inventory Tracking",
+						"generate": "inventory_tracking"
+					},
+					{
+						"extract": "variants",
+						"generate": "variants"
+					},
+					{
+						"generate": "is_visible",
+						"hardCodedValue": "true",
+						"dataType": "boolean"
+					}]
+				},
+				"rest": {
+					"relativeURI": ["/v3/catalog/products/{{{[Product Id]}}}",
+					"/v3/catalog/products"],
+					"method": ["PUT",
+					"POST"],
+					"headers": [],
+					"lookups": []
+				}
+			}
+		},
+		"isLoaded": true,
+		"dependencyVerified": true,
+		"resolved": true
+	},
+	"flow-item": {
+		"dependson": ["import-item",
+		"export-item"],
+		"edition": ["premium"],
+		"filelocation": "bigcommerceData/flows/item.json",
+		"info": {
+			"data": {
+				"name": "Item Export from NetSuite to BigCommerce",
+				"disabled": false,
+				"_exportId": "5850eb82659aee20b8704df0",
+				"_importId": "5850eb82659aee20b8704df1"
+			},
+			"resourcetype": "flows",
+			"jsonpath": [{
+				"record": "export-item",
+				"readfrom": [{
+					"readfrom": "_id",
+					"record": "export-item"
+				}],
+				"writeto": "_exportId"
+			},
+			{
+				"record": "import-item",
+				"readfrom": [{
+					"readfrom": "_id",
+					"record": "import-item"
+				}],
+				"writeto": "_importId"
+			}],
+			"bearerToken": "bearerToken",
+			"response": {
+				"_id": "5850eb83659aee20b8704df5",
+				"lastModified": "2016-12-14T06:49:39.261Z",
+				"name": "Item Export from NetSuite to BigCommerce",
+				"disabled": false,
+				"_exportId": "5850eb82659aee20b8704df0",
+				"_importId": "5850eb82659aee20b8704df1",
+				"_integrationId": "integrationId",
+				"_connectorId": "5811cf7018593a3064647fe4",
+				"skipRetries": false
+			}
+		},
+		"isLoaded": true,
+		"dependencyVerified": true,
+		"resolved": true
+	},
+	"export-categories": {
+		"filelocation": "bigcommerceData/exports/categories.json",
+		"edition": ["premium"],
+		"dependson": ["state",
+		"bigcommerceintegration-load"],
+		"info": {
+			"data": {
+				"name": "bigcommerce-netsuite-product-categories-export-adaptor",
+				"asynchronous": true,
+				"preserveOrder": false,
+				"sampleData": {
+					"id": 18,
+					"parent_id": 0,
+					"name": "Bath",
+					"description": "",
+					"sort_order": 1,
+					"page_title": "",
+					"meta_keywords": "",
+					"meta_description": "",
+					"layout_file": "category_with_facets.html",
+					"parent_category_list": [18],
+					"image_file": "0",
+					"is_visible": true,
+					"search_keywords": "",
+					"url": "/bath/"
+				},
+				"rest": {
+					"relativeURI": "/v2/categories",
+					"method": "GET",
+					"headers": []
+				},
+				"_connectionId": "5850d80aff431268c882d27f"
+			},
+			"resourcetype": "exports",
+			"jsonpath": [{
+				"record": "bigcommerceintegration-load",
+				"readfrom": [{
+					"readfrom": "$.settings.commonresources.bigcommerceConnectionId",
+					"record": "bigcommerceintegration-load"
+				}],
+				"writeto": "_connectionId"
+			}],
+			"bearerToken": "bearerToken",
+			"response": {
+				"_id": "5850eb82659aee20b8704df2",
+				"lastModified": "2016-12-14T06:49:39.095Z",
+				"name": "bigcommerce-netsuite-product-categories-export-adaptor",
+				"_connectionId": "5850d80aff431268c882d27f",
+				"_integrationId": "integrationId",
+				"_connectorId": "5811cf7018593a3064647fe4",
+				"apiIdentifier": "eaba35dc46",
+				"asynchronous": true,
+				"sampleData": {
+					"url": "/bath/",
+					"search_keywords": "",
+					"is_visible": true,
+					"image_file": "0",
+					"parent_category_list": [18],
+					"layout_file": "category_with_facets.html",
+					"meta_description": "",
+					"meta_keywords": "",
+					"page_title": "",
+					"sort_order": 1,
+					"description": "",
+					"name": "Bath",
+					"parent_id": 0,
+					"id": 18
+				},
+				"rest": {
+					"relativeURI": "/v2/categories",
+					"method": "GET",
+					"headers": []
+				},
+				"file": {
+					"csv": {
+						"keyColumns": [],
+						"hasHeaderRow": false
+					}
+				}
+			}
+		},
+		"isLoaded": true,
+		"dependencyVerified": true,
+		"resolved": true
+	},
+	"import-categories": {
+		"filelocation": "bigcommerceData/imports/categories.json",
+		"edition": ["premium"],
+		"dependson": ["bigcommerceintegration-load"],
+		"info": {
+			"data": {
+				"name": "bigcommerce-netsuite-product-categories-import-adaptor",
+				"distributed": true,
+				"_connectionId": "5850d80aff431268c882d27e"
+			},
+			"resourcetype": "imports",
+			"jsonpath": [{
+				"record": "bigcommerceintegration-load",
+				"readfrom": [{
+					"readfrom": "$.settings.commonresources.netsuiteConnectionId",
+					"record": "bigcommerceintegration-load"
+				}],
+				"writeto": "_connectionId"
+			}],
+			"bearerToken": "bearerToken",
+			"response": {
+				"_id": "5850eb82659aee20b8704df3",
+				"lastModified": "2016-12-14T06:49:39.087Z",
+				"name": "bigcommerce-netsuite-product-categories-import-adaptor",
+				"_connectionId": "5850d80aff431268c882d27e",
+				"_integrationId": "integrationId",
+				"_connectorId": "5811cf7018593a3064647fe4",
+				"distributed": true,
+				"apiIdentifier": "i1a3106a5d"
+			}
+		},
+		"isLoaded": true,
+		"dependencyVerified": true,
+		"resolved": true
+	},
+	"import-categories-distributed": {
+		"filelocation": "bigcommerceData/imports/categories-distributed.json",
+		"edition": ["premium"],
+		"dependson": ["import-categories",
+		"bigcommerceintegration-load"],
+		"info": {
+			"data": {
+				"recordType": "customrecord_celigo_bgc_item_categories",
+				"lookups": [],
+				"mapping": {
+					"fields": [{
+						"generate": "custrecord_celigo_bgc_item_categoriesid",
+						"extract": "id",
+						"dataType": "string"
+					},
+					{
+						"generate": "name",
+						"extract": "name",
+						"dataType": "string"
+					}],
+					"lists": []
+				},
+				"hooks": {
+					"preMap": {
+						"fileInternalId": null,
+						"function": null
+					},
+					"postMap": {
+						"fileInternalId": null,
+						"function": null
+					},
+					"postSubmit": {
+						"fileInternalId": null,
+						"function": null
+					}
+				},
+				"disabled": false,
+				"ioEnvironment": "",
+				"operation": "addupdate",
+				"internalIdLookup": {
+					"expression": ["custrecord_celigo_bgc_item_categoriesid",
+					"is",
+					"{{id}}"]
+				},
+				"_id": "5850eb82659aee20b8704df3"
+			},
+			"resourcetype": "imports",
+			"distributed": true,
+			"jsonpath": [{
+				"record": "import-categories",
+				"readfrom": [{
+					"readfrom": "_id",
+					"record": "import-categories"
+				}],
+				"writeto": "_id"
+			}],
+			"bearerToken": "bearerToken",
+			"response": {
+				"_id": "5850eb82659aee20b8704df3",
+				"_userId": "57dfc5236f54c5ac322478d4",
+				"recordType": "customrecord_celigo_bgc_item_categories",
+				"lookups": [],
+				"mapping": {
+					"fields": [{
+						"generate": "custrecord_celigo_bgc_item_categoriesid",
+						"extract": "id",
+						"dataType": "string"
+					},
+					{
+						"generate": "name",
+						"extract": "name",
+						"dataType": "string"
+					}],
+					"lists": []
+				},
+				"hooks": {
+					"preMap": {
+						"fileInternalId": null,
+						"function": null
+					},
+					"postMap": {
+						"fileInternalId": null,
+						"function": null
+					},
+					"postSubmit": {
+						"fileInternalId": null,
+						"function": null
+					}
+				},
+				"disabled": false,
+				"ioEnvironment": "",
+				"operation": "addupdate",
+				"internalIdLookup": {
+					"expression": ["custrecord_celigo_bgc_item_categoriesid",
+					"is",
+					"{{id}}"]
+				}
+			}
+		},
+		"isLoaded": true,
+		"dependencyVerified": true,
+		"resolved": true
+	},
+	"flow-categories": {
+		"filelocation": "bigcommerceData/flows/categories.json",
+		"edition": ["premium"],
+		"dependson": ["import-categories-distributed",
+		"export-categories"],
+		"info": {
+			"data": {
+				"name": "BigCommerce Product Categories to  NetSuite Add/Update",
+				"disabled": false,
+				"_exportId": "5850eb82659aee20b8704df2",
+				"_importId": "5850eb82659aee20b8704df3"
+			},
+			"resourcetype": "flows",
+			"jsonpath": [{
+				"record": "export-categories",
+				"readfrom": [{
+					"readfrom": "_id",
+					"record": "export-categories"
+				}],
+				"writeto": "_exportId"
+			},
+			{
+				"record": "import-categories",
+				"readfrom": [{
+					"readfrom": "_id",
+					"record": "import-categories"
+				}],
+				"writeto": "_importId"
+			}],
+			"bearerToken": "bearerToken",
+			"response": {
+				"_id": "5850eb8c659aee20b8704df7",
+				"lastModified": "2016-12-14T06:49:48.549Z",
+				"name": "BigCommerce Product Categories to  NetSuite Add/Update",
+				"disabled": false,
+				"_exportId": "5850eb82659aee20b8704df2",
+				"_importId": "5850eb82659aee20b8704df3",
+				"_integrationId": "integrationId",
+				"_connectorId": "5811cf7018593a3064647fe4",
+				"skipRetries": false
+			}
+		},
+		"isLoaded": true,
+		"dependencyVerified": true,
+		"resolved": true
+	},
+	"export-itemid-webhook": {
+		"dependson": ["state",
+		"bigcommerceintegration-load"],
+		"edition": ["premium"],
+		"filelocation": "bigcommerceData/exports/itemids-webhook.json",
+		"info": {
+			"data": {
+				"name": "itemids-export-webhook",
+				"type": "webhook",
+				"preserveOrder": false,
+				"webhook": {
+					"provider": "custom",
+					"verify": "hmac",
+					"algorithm": "sha256",
+					"encoding": "base64",
+					"key": "4291e99e2d5a27a41fe7f041",
+					"header": "bgc-itemids-flow"
+				},
+				"sampleData": {
+					"product_id": "",
+					"variant_id": ""
+				}
+			},
+			"resourcetype": "exports",
+			"jsonpath": [],
+			"bearerToken": "bearerToken",
+			"response": {
+				"_id": "5850eb82659aee20b8704df4",
+				"lastModified": "2016-12-14T06:49:39.090Z",
+				"name": "itemids-export-webhook",
+				"_integrationId": "integrationId",
+				"_connectorId": "5811cf7018593a3064647fe4",
+				"type": "webhook",
+				"webhook": {
+					"provider": "custom",
+					"verify": "hmac",
+					"algorithm": "sha256",
+					"encoding": "base64",
+					"key": "******",
+					"header": "bgc-itemids-flow"
+				},
+				"sampleData": {
+					"variant_id": "",
+					"product_id": ""
+				}
+			}
+		},
+		"isLoaded": true,
+		"dependencyVerified": true,
+		"resolved": true
+	},
+	"flow-itemid-webhook": {
+		"dependson": ["import-massUpdate",
+		"export-itemid-webhook"],
+		"edition": ["premium"],
+		"filelocation": "bigcommerceData/flows/itemids-webhook.json",
+		"info": {
+			"data": {
+				"disabled": false,
+				"name": "BigCommerce Product ID to NetSuite Item Add/Update",
+				"_exportId": "5850eb82659aee20b8704df4"
+			},
+			"resourcetype": "flows",
+			"jsonpath": [{
+				"readfrom": [{
+					"readfrom": "BigCommerce Product ID to NetSuite Item Add/Update"
+				}],
+				"writeto": "name"
+			},
+			{
+				"record": "export-itemid-webhook",
+				"readfrom": [{
+					"readfrom": "_id",
+					"record": "export-itemid-webhook"
+				}],
+				"writeto": "_exportId"
+			},
+			{
+				"record": "import-massUpdate",
+				"readfrom": "_id",
+				"writeto": "_importId"
+			}],
+			"bearerToken": "bearerToken",
+			"response": {
+				"_id": "5850eb83659aee20b8704df6",
+				"lastModified": "2016-12-14T06:49:39.263Z",
+				"name": "BigCommerce Product ID to NetSuite Item Add/Update",
+				"disabled": false,
+				"_exportId": "5850eb82659aee20b8704df4",
+				"_integrationId": "integrationId",
+				"_connectorId": "5811cf7018593a3064647fe4",
+				"skipRetries": false
+			}
+		},
+		"isLoaded": true,
+		"dependencyVerified": true,
+		"resolved": true
+	},
+	"item-sync": {
+		"name": "item-sync",
+		"edition": ["premium"],
+		"resolved": true,
+		"dependson": ["flow-item",
+		"flow-itemid-webhook"],
+		"filelocation": "bigcommerceData/sections/item-sync.json",
+		"info": {
+			"data": {
+				"title": "Product",
+				"columns": 1,
+				"flows": [{
+					"_id": "5850eb83659aee20b8704df5",
+					"showMapping": true,
+					"showSchedule": true
+				}],
+				"fields": [{
+					"label": "NetSuite Saved Search for exporting items",
+					"required": true,
+					"value": "customsearch_celigo_bgc_item_export",
+					"type": "select",
+					"name": "exports_5850eb82659aee20b8704df0_savedSearch_listSavedSearches",
+					"supportsRefresh": true,
+					"options": [["customsearch_celigo_bgc_item_export",
+					"Celigo BigCommerce Item Export Search"]]
+				},
+				{
+					"options": [[]],
+					"supportsRefresh": true,
+					"required": true,
+					"type": "select",
+					"label": "NetSuite price level for syncing product price",
+					"value": "",
+					"name": "exports_5850eb82659aee20b8704df0_updateSearchPricingFilters_listPriceLevels",
+					"tooltip": "Lets you choose the NetSuite price level to be used for exporting the price to Bigcommerce."
+				}]
+			},
+			"jsonpath": [{
+				"record": "flow-item",
+				"readfrom": [{
+					"readfrom": "_id",
+					"record": "flow-item"
+				}],
+				"writeto": "_id",
+				"writetopath": "$.flows[?(@._id==\"bigcommerce_item_flow\")]"
+			},
+			{
+				"record": "nsConnectorUtil-copy-itemExport-savedsearch",
+				"readfrom": "$[0].searchInternalId",
+				"writeto": "value",
+				"writetopath": "$.fields[?(@.name==\"item_export_savedSearch_searchId\")]"
+			},
+			{
+				"record": "nsConnectorUtil-copy-itemExport-savedsearch",
+				"readfrom": "$[0].searchInternalId",
+				"writeto": 0,
+				"removeAll": true,
+				"writetopath": "$.fields[?(@.name==\"item_export_savedSearch_searchId\")].options"
+			},
+			{
+				"record": "nsConnectorUtil-copy-exportExport-savedsearch",
+				"readfrom": [{
+					"readfrom": "Celigo BigCommerce Item Export Search"
+				}],
+				"writeto": 0,
+				"writetopath": "$.fields[?(@.name==\"item_export_savedSearch_searchId\")].options"
+			},
+			{
+				"readfrom": [{
+					"readfrom": "exports_"
+				},
+				{
+					"record": "export-item",
+					"readfrom": "_id"
+				},
+				{
+					"readfrom": "_savedSearch_listSavedSearches"
+				}],
+				"writeto": "name",
+				"writetopath": "$.fields[?(@.name==\"item_export_savedSearch_searchId\")]"
+			},
+			{
+				"readfrom": [{
+					"readfrom": "exports_"
+				},
+				{
+					"record": "export-item",
+					"readfrom": "_id"
+				},
+				{
+					"readfrom": "_updateSearchPricingFilters_listPriceLevels"
+				}],
+				"writeto": "name",
+				"writetopath": "$.fields[?(@.name==\"add_priceLevel_setting\")]"
+			}],
+			"response": {
+				"data": {
+					"title": "Product",
+					"columns": 1,
+					"flows": [{
+						"_id": "bigcommerce_item_flow",
+						"showMapping": true,
+						"showSchedule": true
+					}],
+					"fields": [{
+						"label": "NetSuite Saved Search for exporting items",
+						"required": true,
+						"value": "customsearch_celigo_bgc_item_export",
+						"type": "select",
+						"name": "item_export_savedSearch_searchId",
+						"supportsRefresh": true,
+						"options": [["customsearch_celigo_bgc_item_export",
+						"Celigo BigCommerce Item Export Search"]]
+					},
+					{
+						"options": [[]],
+						"supportsRefresh": true,
+						"required": true,
+						"type": "select",
+						"label": "NetSuite price level for syncing product price",
+						"value": "",
+						"name": "add_priceLevel_setting",
+						"tooltip": "Lets you choose the NetSuite price level to be used for exporting the price to Bigcommerce."
+					}]
+				},
+				"jsonpath": [{
+					"record": "flow-item",
+					"readfrom": "_id",
+					"writeto": "_id",
+					"writetopath": "$.flows[?(@._id==\"bigcommerce_item_flow\")]"
+				},
+				{
+					"record": "nsConnectorUtil-copy-itemExport-savedsearch",
+					"readfrom": "$[0].searchInternalId",
+					"writeto": "value",
+					"writetopath": "$.fields[?(@.name==\"item_export_savedSearch_searchId\")]"
+				},
+				{
+					"record": "nsConnectorUtil-copy-itemExport-savedsearch",
+					"readfrom": "$[0].searchInternalId",
+					"writeto": 0,
+					"removeAll": true,
+					"writetopath": "$.fields[?(@.name==\"item_export_savedSearch_searchId\")].options"
+				},
+				{
+					"record": "nsConnectorUtil-copy-exportExport-savedsearch",
+					"readfrom": [{
+						"readfrom": "Celigo BigCommerce Item Export Search"
+					}],
+					"writeto": 0,
+					"writetopath": "$.fields[?(@.name==\"item_export_savedSearch_searchId\")].options"
+				},
+				{
+					"readfrom": [{
+						"readfrom": "exports_"
+					},
+					{
+						"record": "export-item",
+						"readfrom": "_id"
+					},
+					{
+						"readfrom": "_savedSearch_listSavedSearches"
+					}],
+					"writeto": "name",
+					"writetopath": "$.fields[?(@.name==\"item_export_savedSearch_searchId\")]"
+				},
+				{
+					"readfrom": [{
+						"readfrom": "exports_"
+					},
+					{
+						"record": "export-item",
+						"readfrom": "_id"
+					},
+					{
+						"readfrom": "_updateSearchPricingFilters_listPriceLevels"
+					}],
+					"writeto": "name",
+					"writetopath": "$.fields[?(@.name==\"add_priceLevel_setting\")]"
+				}]
+			},
+			"bearerToken": "bearerToken"
+		},
+		"isLoaded": true,
+		"dependencyVerified": true
+	},
+	"general-sync": {
+		"name": "general-sync",
+		"edition": ["premium"],
+		"resolved": true,
+		"dependson": ["flow-categories"],
+		"filelocation": "bigcommerceData/sections/general-sync.json",
+		"info": {
+			"data": {
+				"title": "General",
+				"columns": 1,
+				"flows": [{
+					"_id": "5850eb8c659aee20b8704df7",
+					"showMapping": true,
+					"showSchedule": true
+				}]
+			},
+			"jsonpath": [{
+				"record": "flow-categories",
+				"readfrom": [{
+					"readfrom": "_id",
+					"record": "flow-categories"
+				}],
+				"writeto": "_id",
+				"writetopath": "$.flows[?(@._id==\"bigcommerce_categories_flow\")]"
+			}],
+			"response": {
+				"data": {
+					"title": "General",
+					"columns": 1,
+					"flows": [{
+						"_id": "bigcommerce_categories_flow",
+						"showMapping": true,
+						"showSchedule": true
+					}]
+				},
+				"jsonpath": [{
+					"record": "flow-categories",
+					"readfrom": "_id",
+					"writeto": "_id",
+					"writetopath": "$.flows[?(@._id==\"bigcommerce_categories_flow\")]"
+				}]
+			},
+			"bearerToken": "bearerToken"
+		},
+		"isLoaded": true,
+		"dependencyVerified": true
+	},
+	"bigcommerce-save-integration": {
+		"name": "bigcommerce-save-integration",
+		"includeToUpgrade": true,
+		"dependson": ["general-sync",
+		"order-sync",
+		"fulfillment-sync",
+		"inventory-sync",
+		"item-sync"],
+		"filelocation": "bigcommerceData/integrations/bigcommerce-save-integration.json",
+		"info": {
+			"data": {
+				"_id": "integrationId",
+				"lastModified": "2016-12-14T05:28:21.209Z",
+				"name": "BigCommerce - NetSuite Connector",
+				"_connectorId": "5811cf7018593a3064647fe4",
+				"install": [{
+					"name": "NetSuite Connection",
+					"description": "Configure NetSuite account credentials",
+					"imageURL": "/images/company-logos/netsuite.png",
+					"completed": true,
+					"installerFunction": "verifyNetSuiteConnection",
+					"uninstallerFunction": "deleteNetSuiteConnection",
+					"_connectionId": "5850d80aff431268c882d27e"
+				},
+				{
+					"name": "BigCommerce Connection",
+					"description": "Configure BigCommerce store credentials",
+					"imageURL": "/images/company-logos/BigCommerce.png",
+					"completed": true,
+					"installerFunction": "verifyBigCommerceConnection",
+					"uninstallerFunction": "deleteBigCommerceConnection",
+					"_connectionId": "5850d80aff431268c882d27f"
+				},
+				{
+					"name": "Integrator Bundle",
+					"description": "Install Integrator Bundle in NetSuite",
+					"imageURL": "/images/company-logos/netsuite.png",
+					"installURL": "https://system.na1.netsuite.com/app/bundler/bundledetails.nl?sourcecompanyid=TSTDRV916910&domain=PRODUCTION&config=F&id=20038",
+					"completed": true,
+					"installerFunction": "verifyIntegratorBundleInstallation",
+					"uninstallerFunction": "uninstallVerifyIntegratorBundle"
+				},
+				{
+					"name": "BigCommerce Bundle",
+					"description": "Install BigCommerce Bundle in NetSuite",
+					"imageURL": "/images/company-logos/netsuite.png",
+					"installURL": "https://system.na1.netsuite.com/app/bundler/bundledetails.nl?sourcecompanyid=TSTDRV916910&domain=PRODUCTION&config=F&id=119235",
+					"completed": null,
+					"installerFunction": "verifyBigCommerceBundleInstallation",
+					"uninstallerFunction": "uninstallVerifyBigCommerceBundle"
+				}],
+				"mode": null,
+				"settings": {
+					"commonresources": {
+						"netsuiteConnectionId": "5850d80aff431268c882d27e",
+						"bigcommerceConnectionId": "5850d80aff431268c882d27f",
+						"shopInstallComplete": "true",
+						"apiIdentifierCustomerImport": "i4705a4000",
+						"genericExportApiIdentifier": "e72adb2f41",
+						"productIdsExportId": "5850eb82659aee20b8704df4"
+					},
+					"sections": [{
+						"title": "General",
+						"columns": 1,
+						"flows": [{
+							"_id": "5850eb8c659aee20b8704df7",
+							"showMapping": true,
+							"showSchedule": true
+						}]
+					},
+					{
+						"title": "Order",
+						"columns": 1,
+						"flows": [{
+							"_id": "5850d872ff431268c882d292",
+							"showMapping": true,
+							"showSchedule": true
+						},
+						{
+							"_id": "5850d872ff431268c882d291",
+							"showMapping": true,
+							"showSchedule": false,
+							"disableSlider": true
+						}],
+						"fields": [{
+							"label": "Add BigCommerce orders with status",
+							"value": "11",
+							"type": "select",
+							"tooltip": "Lets you define the order status in BigCommerce for which the orders should be imported into NetSuite.",
+							"name": "exports_5850d865ff431268c882d287_changeOrderFilterStatus",
+							"required": true,
+							"options": [["7",
+							"Awaiting Payment"],
+							["11",
+							"Awaiting Fulfillment"],
+							["9",
+							"Awaiting Shipment"],
+							["8",
+							"Awaiting Pickup"],
+							["3",
+							"Partially Shipped"],
+							["10",
+							"Completed"],
+							["2",
+							"Shipped"],
+							["5",
+							"Cancelled"],
+							["6",
+							"Declined"],
+							["4",
+							"Refunded"],
+							["13",
+							"Disputed"],
+							["12",
+							"Verification Required"]]
+						},
+						{
+							"label": "Add orders created after",
+							"type": "datetime",
+							"tooltip": "Lets you define the order creation date in BigCommerce only after which the orders should be imported into NetSuite.",
+							"name": "exports_5850d865ff431268c882d287_setStartDateOnDeltaBasedExports",
+							"value": null
+						},
+						{
+							"label": "NetSuite discount item to track BigCommerce discounts",
+							"value": "",
+							"type": "select",
+							"name": "imports_5850d865ff431268c882d286_saveDefaultDiscountItem_listDiscountItems",
+							"supportsRefresh": true,
+							"tooltip": "Lets you choose the corresponding NetSuite item to track discount amounts on your BigCommerce orders. Discount Code used on the BigCommerce order is mapped to the 'BigCommerce Discount Code' field under 'eTail' tab on the Sales Order record in NetSuite.",
+							"options": [null]
+						},
+						{
+							"label": "Trim customer name if invalid on BigCommerce order",
+							"type": "checkbox",
+							"tooltip": "Lets you define a business rule where invalid first name & last name on BigCommerce order are automatically trimmed to first 32 characters before the order is added to NetSuite. This prevents order import failures when the buyer enters more than 32 char for first name and/or last name fields in BigCommerce.",
+							"name": "imports_5850d865ff431268c882d289_trimName",
+							"value": false
+						},
+						{
+							"label": "Remove phone number if invalid on BigCommerce order",
+							"type": "checkbox",
+							"tooltip": "Lets you define a business rule where invalid phone numbers on BigCommerce order are automatically removed before the order is added to NetSuite. This prevents any manual intervention to import orders with invalid phone no.s (<7 digits or alphanumeric format).",
+							"name": "imports_5850d865ff431268c882d286_removeInvalidPhoneNumber",
+							"value": false
+						}]
+					},
+					{
+						"title": "Fulfillment",
+						"columns": 1,
+						"flows": [{
+							"_id": "5850d872ff431268c882d293",
+							"showMapping": true,
+							"showSchedule": true
+						}],
+						"fields": [{
+							"label": "NetSuite Saved Search for syncing item fulfillments",
+							"required": true,
+							"value": null,
+							"type": "select",
+							"name": "exports_5850d86aff431268c882d28f_savedSearch_listSavedSearches",
+							"supportsRefresh": true,
+							"options": [[null,
+							"Celigo BigCommerce Fulfillment Export Search"]]
+						}]
+					},
+					{
+						"title": "Inventory",
+						"columns": 1,
+						"flows": [{
+							"_id": "5850d872ff431268c882d294",
+							"showMapping": true,
+							"showSchedule": true
+						},
+						{
+							"_id": "5850d872ff431268c882d295",
+							"showMapping": true,
+							"showSchedule": true
+						}],
+						"fields": [{
+							"label": "NetSuite Saved Search for syncing inventory levels",
+							"required": true,
+							"value": null,
+							"type": "select",
+							"name": "exports_5850d86aff431268c882d290_savedSearch_listSavedSearches",
+							"supportsRefresh": true,
+							"options": [[null,
+							"Celigo BigCommerce Inventory Export Search"]]
+						},
+						{
+							"value": false,
+							"name": "exports_5850d86aff431268c882d290_toggleNetsuiteExportType_lastquantityavailablechange",
+							"type": "checkbox",
+							"tooltip": "Enabling this setting allows you to sync the inventory levels for all the NetSuite items (linked to your BigCommerce store) on each run of the inventory export data flow.",
+							"label": "Always sync inventory levels for entire catalog"
+						},
+						{
+							"options": [null],
+							"supportsRefresh": true,
+							"required": false,
+							"type": "multiselect",
+							"label": "NetSuite locations to pick inventory from",
+							"name": "exports_5850d86aff431268c882d290_updateSearchLocationFilters_listLocations",
+							"tooltip": "Lets you choose the inventory location(s) in NetSuite from which the inventory quantities should be read & exported to BigCommerce."
+						}]
+					},
+					{
+						"title": "Product",
+						"columns": 1,
+						"flows": [{
+							"_id": "5850eb83659aee20b8704df5",
+							"showMapping": true,
+							"showSchedule": true
+						}],
+						"fields": [{
+							"label": "NetSuite Saved Search for exporting items",
+							"required": true,
+							"value": "customsearch_celigo_bgc_item_export",
+							"type": "select",
+							"name": "exports_5850eb82659aee20b8704df0_savedSearch_listSavedSearches",
+							"supportsRefresh": true,
+							"options": [["customsearch_celigo_bgc_item_export",
+							"Celigo BigCommerce Item Export Search"]]
+						},
+						{
+							"options": [[]],
+							"supportsRefresh": true,
+							"required": true,
+							"type": "select",
+							"label": "NetSuite price level for syncing product price",
+							"value": "",
+							"name": "exports_5850eb82659aee20b8704df0_updateSearchPricingFilters_listPriceLevels",
+							"tooltip": "Lets you choose the NetSuite price level to be used for exporting the price to Bigcommerce."
+						}]
+					}],
+					"connectorEdition": "premium"
+				},
+				"version": "1.0.2"
+			},
+			"resourcetype": "integrations",
+			"jsonpath": [{
+				"record": "bigcommerceintegration-load",
+				"readfrom": "$",
+				"writeto": "$"
+			},
+			{
+				"record": "order-sync",
+				"readfrom": "$",
+				"writeto": "sections",
+				"removeAll": true,
+				"writetopath": "$.settings"
+			},
+			{
+				"record": "general-sync",
+				"readfrom": [{
+					"readfrom": "$",
+					"record": "general-sync"
+				}],
+				"writeto": "sections",
+				"writetopath": "$.settings",
+				"position": "0"
+			},
+			{
+				"record": "fulfillment-sync",
+				"readfrom": "$",
+				"writeto": "sections",
+				"writetopath": "$.settings"
+			},
+			{
+				"record": "inventory-sync",
+				"readfrom": "$",
+				"writeto": "sections",
+				"writetopath": "$.settings"
+			},
+			{
+				"record": "item-sync",
+				"readfrom": [{
+					"readfrom": "$",
+					"record": "item-sync"
+				}],
+				"writeto": "sections",
+				"writetopath": "$.settings"
+			},
+			{
+				"record": "state",
+				"readfrom": [{
+					"readfrom": "stepcompleted",
+					"record": "state"
+				}],
+				"writeto": "completed",
+				"writetopath": "$.install[?(@.installerFunction==\"verifyBigCommerceBundleInstallation\")]"
+			},
+			{
+				"record": "state",
+				"readfrom": [{
+					"readfrom": "mode",
+					"record": "state"
+				}],
+				"writeto": "mode"
+			},
+			{
+				"readfrom": [{
+					"readfrom": true
+				}],
+				"writeto": "shopInstallComplete",
+				"writetopath": "$.settings.commonresources"
+			},
+			{
+				"record": "import-customer",
+				"readfrom": "apiIdentifier",
+				"writeto": "apiIdentifierCustomerImport",
+				"writetopath": "$.settings.commonresources"
+			},
+			{
+				"record": "export-itemid-webhook",
+				"readfrom": [{
+					"readfrom": "_id",
+					"record": "export-itemid-webhook"
+				}],
+				"writeto": "productIdsExportId",
+				"writetopath": "$.settings.commonresources"
+			},
+			{
+				"record": "generic-export",
+				"readfrom": "apiIdentifier",
+				"writeto": "genericExportApiIdentifier",
+				"writetopath": "$.settings.commonresources"
+			},
+			{
+				"record": "state",
+				"readfrom": [{
+					"readfrom": "connectorEdition",
+					"record": "state"
+				}],
+				"writeto": "connectorEdition",
+				"writetopath": "$.settings"
+			}],
+			"bearerToken": "bearerToken"
+		},
+		"isLoaded": true
+	},
+	"state": {
+		"isLoaded": true,
+		"resolved": true,
+		"includeToUpgrade": true,
+		"connectorEdition": "premium",
+		"info": {
+			"response": {
+				"_integrationId": "integrationId",
+				"licenseOpts": {
+					"connectorEdition": "premium"
+				},
+				"bearerToken": "bearerToken",
+				"connectorEdition": "premium",
+				"upgradeMode": true,
+				"currentEdition": "standard",
+				"upgradeEdition": "premium",
+				"connectorConstants": {
+					"STORE_IDENTIFY_STORE_MAP_ATTR": "shopid"
+				}
+			},
+			"bearerToken": "bearerToken"
+		}
+	},
+	"nsConnectorUtil-copy-fulfillmentExport-savedsearch": {
+      "name": "nsConnectorUtil-copy-fulfillmentExport-savedsearch",
+      "edition": [
+        "standard",
+        "premium",
+        "enterprise"
+      ],
+      "dependson": [
+        "magentointegration-load"
+      ],
+      "info": {
+        "data": {
+			"proxyData": {
+				"requestBody": [
+					{
+						"type": "savedsearch",
+						"operation": "copy",
+						"config": {
+							"title": "Celigo BigCommerce Fulfillment Export Search",
+							"copyFromSearchId": "customsearch_celigo_bigc_fulfill_export",
+							"replaceFilters": false,
+							"filters": [
+								[
+									"custbody_celigo_etail_channel.name",
+									"is",
+									"BigCommerce"
+								],
+								"AND",
+								[
+									"custbody_celigo_bgc_store_id",
+									"is"
+								]
+							]
+						}
+					}
+				],
+				"method": "POST",
+				"connectionId": "connectionId"
+			}
+		},
+        "proxyCall": true,
+		"jsonpath": [
+			{
+				"readfrom": "Celigo BigCommerce Fulfillment Export Search",
+				"writetopath": "$.proxyData.requestBody[0].config",
+				"writeto": "title"
+			},
+			{
+				"readfrom": {"test": "test"},
+				"writetopath": "$.proxyData.requestBody[0]",
+				"writeto": "filter"
+			},
+          {
+            "record": "magentointegration-load",
+            "readfrom": [
+              {
+                "readfrom": "$.settings.commonresources.netsuiteConnectionId",
+                "record": "magentointegration-load"
+              }
+            ],
+            "writetopath": "$.proxyData",
+            "writeto": "connectionId"
+          }
+        ],
+        "bearerToken": "otte8567ee5e41d4c06a77bd72daf79e349",
+        "method": "POST",
+        "deployId": "customdeploy_celigo_nsconnectorutil",
+        "scriptId": "customscript_celigo_nsconnectorutil",
+        "relativeURI": null,
+        "connectionId": "5901d8646e2b831e7fe71cb8",
+        "response": [
+          {
+            "statusCode": 422,
+            "searchId": null,
+            "searchInternalId": null,
+            "error": {
+              "code": "NAME_ALREADY_IN_USE",
+              "message": "Unable to save search due to following error : A search has already been saved with that name. Please use a different name."
+            }
+          }
+        ]
+      },
+      "isLoaded": true,
+      "dependencyVerified": false,
+      "resolved": false
+    },
+	"nsConnectorUtil-copy-fulfillmentExport": {
+      "name": "nsConnectorUtil-copy-fulfillmentExport",
+      "edition": [
+        "standard",
+        "premium",
+        "enterprise"
+      ],
+      "dependson": [
+        "magentointegration-load"
+      ],
+      "info": {
+        "data": {
+			"apiIdentifier": "apiIdentifier",
+			"apiIdentifierData": {"test": "test"}
+		},
+        "apiIdentifier": true,
+        "jsonpath": [
+          {
+            "record": "magentointegration-load",
+            "readfrom": [
+              {
+                "readfrom": "$.settings.commonresources.netsuiteConnectionId",
+                "record": "magentointegration-load"
+              }
+            ],
+            "writetopath": "$.proxyData",
+            "writeto": "connectionId"
+          }
+        ],
+        "connectionId": "5901d8646e2b831e7fe71cb8",
+        "response": [
+          {
+            "statusCode": 422,
+            "searchId": null,
+            "searchInternalId": null,
+            "error": {
+              "code": "NAME_ALREADY_IN_USE",
+              "message": "Unable to save search due to following error : A search has already been saved with that name. Please use a different name."
+            }
+          }
+        ]
+      },
+      "isLoaded": true,
+      "dependencyVerified": false,
+      "resolved": false
+    }
+}

@@ -1,0 +1,960 @@
+{
+    "oldSettings": {
+        "exports_5923923425784d5998a3ca48_executionType": {
+            "label": "Sync private billing schedules",
+            "value": [
+              "create",
+              "edit"
+            ],
+            "name": "exports_5923923425784d5998a3ca48_executionType",
+            "options": [
+                  [
+                    "edit",
+                    "Edit"
+                  ],
+                  [
+                    "create",
+                    "Create"
+                  ],
+                  [
+                    "xedit",
+                    "xEdit"
+                  ]
+                ]
+        }
+    },
+    "newSettings": {
+        "exports_5923923425784d5998a3ca48_executionType": [
+          "create",
+          "edit",
+          "xedit"
+        ]
+    },
+    "setting": "exports_5923923425784d5998a3ca48_executionType",
+    "options": {
+        "pending": {
+            "exports_5923923425784d5998a3ca48_executionType": [
+              "create",
+              "edit",
+              "xedit"
+            ]
+        },
+        "_integrationId": "592d500cfae7551f2e4c20dd",
+        "bearerToken": "ott8c35367e26394ef08bee9ee67f41d576",
+        "integrationRecord": {
+            "_id": "592d500cfae7551f2e4c20dd",
+            "lastModified": "2017-05-30T10:58:59.510Z",
+            "name": "Salesforce - Subscription Billing Connector",
+            "_connectorId": "58ee6029319bd30cc2fee160",
+            "install": [
+              {
+                "name": "NetSuite Connection",
+                "description": "Configure NetSuite account credentials",
+                "imageURL": "/images/company-logos/netsuite.png",
+                "completed": true,
+                "installerFunction": "verifyNetSuiteConnection",
+                "uninstallerFunction": "deleteNetSuiteConnection",
+                "_connectionId": "592d500cfae7551f2e4c20df"
+              },
+              {
+                "name": "Salesforce Connection",
+                "description": "Configure Salesforce Account credentials",
+                "imageURL": "/images/company-logos/salesforce.png",
+                "completed": true,
+                "installerFunction": "verifyProductConnection",
+                "uninstallerFunction": "deleteSalesforceConnection",
+                "_connectionId": "592d500cfae7551f2e4c20e0"
+              },
+              {
+                "name": "Integrator Bundle",
+                "description": "Install Integrator Bundle in NetSuite",
+                "imageURL": "/images/company-logos/netsuite.png",
+                "installURL": "https://system.netsuite.com/app/bundler/bundledetails.nl?sourcecompanyid=TSTDRV840460&domain=PRODUCTION&config=F&id=20037",
+                "completed": true,
+                "installerFunction": "verifyIntegratorBundleInstallation",
+                "uninstallerFunction": "uninstallVerifyIntegratorBundle"
+              },
+              {
+                "name": "Subscription Billing Bundle",
+                "description": "Install Subscription Billing Bundle in NetSuite",
+                "imageURL": "/images/company-logos/netsuite.png",
+                "installURL": "https://system.netsuite.com/app/bundler/bundledetails.nl?sourcecompanyid=TSTDRV840460&domain=PRODUCTION&config=F&id=48839",
+                "completed": true,
+                "installerFunction": "verifyProductBundleInstallation",
+                "uninstallerFunction": "uninstallVerifyMagentoBundle"
+              }
+            ],
+            "mode": "settings",
+            "settings": {
+              "commonresources": {
+                "netsuiteConnectionId": "592d500cfae7551f2e4c20df",
+                "salesforceConnectionId": "592d500cfae7551f2e4c20e0"
+              },
+              "configs": {
+                "salesforce_query_based_export": {
+                  "apiId": "e42e186a48",
+                  "id": "592d506bfae7551f2e4c20f0"
+                },
+                "salesforce_billing_account_to_netSuite_billing_account_add_export": {
+                  "apiId": "ebd0065dd6",
+                  "id": "592d506cfae7551f2e4c20f5"
+                },
+                "salesforce_billing_account_to_netSuite_billing_account_add_import": {
+                  "apiId": "i0726cea60",
+                  "id": "592d506afae7551f2e4c20e7"
+                },
+                "salesforce_product_to_netSuite_subscription_add_export": {
+                  "apiId": "ef425ca16f",
+                  "id": "592d506b15336238f8325d00"
+                },
+                "salesforce_product_to_netSuite_subscription_add_import": {
+                  "apiId": "id1384ff94",
+                  "id": "592d506c15336238f8325d0e"
+                },
+                "netsuite_billing_schedule_to_salesforce_billing_schedule_import": {
+                  "apiId": "i3e54573f5",
+                  "id": "592d506bfae7551f2e4c20ee"
+                },
+                "netsuite_billing_account_to_salesforce_billing_account_add_import": {
+                  "apiId": "ia3e929129",
+                  "id": "592d506cfae7551f2e4c20f8"
+                },
+                "netsuite_subscription_plan_line_to_salesforce_subscription_plan_line_add_import": {
+                  "apiId": "idb6d901e0",
+                  "id": "592d506bfae7551f2e4c20f3"
+                },
+                "netsuite_subscription_plan_to_salesforce_subscription_plan_add_import": {
+                  "apiId": "iecb0eebc0",
+                  "id": "592d506b15336238f8325d01"
+                },
+                "netsuite_price_book_to_salesforce_price_book_add_import": {
+                  "apiId": "ie2112967f",
+                  "id": "592d506bfae7551f2e4c20eb"
+                },
+                "netsuite_price_book_line_to_salesforce_price_book_line_add_import": {
+                  "apiId": "ib508c4cb5",
+                  "id": "592d506c15336238f8325d0d"
+                },
+                "netsuite_price_tier_to_salesforce_price_tier_add_import": {
+                  "apiId": "i8084f1d9c",
+                  "id": "592d506a15336238f8325cfe"
+                },
+                "netsuite_subscription_line_to_salesforce_subscription_line_update_import": {
+                  "apiId": "i46cca3301",
+                  "id": "592d506afae7551f2e4c20e8"
+                },
+                "netsuite_billing_schedule_to_salesforce_billing_schedule_add_export": {
+                  "apiId": "eb42591388",
+                  "id": "592d506c15336238f8325d0b"
+                },
+                "netsuite_billing_account_to_salesforce_billing_account_add_export": {
+                  "apiId": "ed886013f2",
+                  "id": "592d506b15336238f8325d04"
+                },
+                "netsuite_subscription_plan_to_salesforce_subscription_plan_add_export": {
+                  "apiId": "ee428878ed",
+                  "id": "592d506cfae7551f2e4c20f7"
+                }
+              },
+              "sections": [
+                {
+                  "flows": [
+                    {
+                      "settings": [
+                        {
+                          "options": [
+                            [
+                              "userevent",
+                              "User Event"
+                            ],
+                            [
+                              "webservices",
+                              "Web Services"
+                            ],
+                            [
+                              "csvimport",
+                              "CSV Import"
+                            ],
+                            [
+                              "scheduled",
+                              "Scheduled"
+                            ],
+                            [
+                              "workflow",
+                              "Work Flow"
+                            ],
+                            [
+                              "userinterface",
+                              "User Interface"
+                            ]
+                          ],
+                          "value": [
+                            "webservices",
+                            "csvimport",
+                            "userinterface"
+                          ],
+                          "name": "executionContext",
+                          "type": "multiselect",
+                          "label": "Execution Context"
+                        },
+                        {
+                          "options": [
+                            [
+                              "edit",
+                              "Edit"
+                            ],
+                            [
+                              "create",
+                              "Create"
+                            ],
+                            [
+                              "xedit",
+                              "xEdit"
+                            ]
+                          ],
+                          "value": [
+                            "edit",
+                            "create",
+                            "xedit"
+                          ],
+                          "name": "executionType",
+                          "type": "multiselect",
+                          "label": "Execution Type"
+                        },
+                        {
+                          "value": "[\"text:scheduletype\",\"=\",\"Charge-Based\"]",
+                          "name": "qualifier",
+                          "expressionType": "export",
+                          "type": "expression",
+                          "label": "Qualifier"
+                        }
+                      ],
+                      "showMapping": true,
+                      "group": "NetSuite to Salesforce",
+                      "_id": "592d506d15336238f8325d17"
+                    }
+                  ],
+                  "fields": [
+                    {
+                      "tooltip": "Enable this setting to sync Billing Schedule from NetSuite to Salesforce along with Billing Account only. If unchecked, Billing Schedules will be synced from NetSuite to Salesforce when they are created or updated. ",
+                      "value": "false",
+                      "type": "checkbox",
+                      "name": "sync_billing_schedule_only_with_billing_account",
+                      "label": "Sync Billing Schedule only with Billing Account"
+                    },
+                    {
+                      "tooltip": "Enable this setting to sync Billing Schedules marked as ‘inactive’ in NetSuite to Salesforce.",
+                      "value": "false",
+                      "type": "checkbox",
+                      "name": "sync_inactive_billing_schedules",
+                      "label": "Sync inactive Billing Schedules"
+                    },
+                    {
+                      "tooltip": "Enable this setting to sync Billing Schedules marked as ‘private’ in NetSuite to Salesforce. If unchecked, the Connector will only sync public Billing Schedules from NetSuite to Salesforce.",
+                      "value": "false",
+                      "type": "checkbox",
+                      "name": "sync_private_billing_schedules",
+                      "label": "Sync private Billing Schedules"
+                    }
+                  ],
+                  "iconURL": "/images/icons/settings/BillingSchedule.png",
+                  "title": "Billing Schedule"
+                },
+                {
+                  "flows": [
+                    {
+                      "settings": [
+                        {
+                          "options": [
+                            [
+                              "userevent",
+                              "User Event"
+                            ],
+                            [
+                              "webservices",
+                              "Web Services"
+                            ],
+                            [
+                              "csvimport",
+                              "CSV Import"
+                            ],
+                            [
+                              "scheduled",
+                              "Scheduled"
+                            ],
+                            [
+                              "workflow",
+                              "Work Flow"
+                            ],
+                            [
+                              "userinterface",
+                              "User Interface"
+                            ]
+                          ],
+                          "value": [
+                            "webservices",
+                            "csvimport",
+                            "userinterface"
+                          ],
+                          "name": "executionContext",
+                          "type": "multiselect",
+                          "label": "Execution Context"
+                        },
+                        {
+                          "options": [
+                            [
+                              "edit",
+                              "Edit"
+                            ],
+                            [
+                              "create",
+                              "Create"
+                            ],
+                            [
+                              "xedit",
+                              "xEdit"
+                            ]
+                          ],
+                          "value": [
+                            "edit",
+                            "create",
+                            "xedit"
+                          ],
+                          "name": "executionType",
+                          "type": "multiselect",
+                          "label": "Execution Type"
+                        },
+                        {
+                          "value": "[\"custrecord_celigo_sfsb_billingaccount_id\",\"empty\",true]",
+                          "name": "qualifier",
+                          "expressionType": "export",
+                          "type": "expression",
+                          "label": "Qualifier"
+                        }
+                      ],
+                      "showSchedule": false,
+                      "showMapping": true,
+                      "group": "NetSuite to Salesforce",
+                      "_id": "592d506dfae7551f2e4c2102"
+                    },
+                    {
+                      "settings": [
+                        {
+                          "options": [
+                            [
+                              "userevent",
+                              "User Event"
+                            ],
+                            [
+                              "webservices",
+                              "Web Services"
+                            ],
+                            [
+                              "csvimport",
+                              "CSV Import"
+                            ],
+                            [
+                              "scheduled",
+                              "Scheduled"
+                            ],
+                            [
+                              "workflow",
+                              "Work Flow"
+                            ],
+                            [
+                              "userinterface",
+                              "User Interface"
+                            ]
+                          ],
+                          "value": [
+                            "webservices",
+                            "csvimport",
+                            "userinterface"
+                          ],
+                          "name": "executionContext",
+                          "type": "multiselect",
+                          "label": "Execution Context"
+                        },
+                        {
+                          "options": [
+                            [
+                              "edit",
+                              "Edit"
+                            ],
+                            [
+                              "create",
+                              "Create"
+                            ],
+                            [
+                              "xedit",
+                              "xEdit"
+                            ]
+                          ],
+                          "value": [
+                            "edit",
+                            "create",
+                            "xedit"
+                          ],
+                          "name": "executionType",
+                          "type": "multiselect",
+                          "label": "Execution Type"
+                        },
+                        {
+                          "value": "[\"custrecord_celigo_sfsb_billingaccount_id\",\"empty\",true]",
+                          "name": "qualifier",
+                          "expressionType": "export",
+                          "type": "expression",
+                          "label": "Qualifier"
+                        }
+                      ],
+                      "showSchedule": false,
+                      "showMapping": true,
+                      "group": "NetSuite to Salesforce",
+                      "_id": "592d506d15336238f8325d15"
+                    },
+                    {
+                      "showSchedule": false,
+                      "showMapping": true,
+                      "group": "Salesforce to NetSuite",
+                      "_id": "592d506dfae7551f2e4c2101"
+                    },
+                    {
+                      "showSchedule": false,
+                      "showMapping": true,
+                      "group": "Salesforce to NetSuite",
+                      "_id": "592d506d15336238f8325d14"
+                    }
+                  ],
+                  "fields": [
+                    {
+                      "tooltip": "Enable this setting to only sync Billing Account marked as ‘customer default’ in NetSuite to Salesforce.",
+                      "value": "false",
+                      "type": "checkbox",
+                      "name": "sync_only_default_billing_account",
+                      "label": "Only sync default Billing Account"
+                    },
+                    {
+                      "tooltip": "Enable this setting to sync Billing Accounts marked as ‘inactive’ in NetSuite to Salesforce.",
+                      "value": "false",
+                      "type": "checkbox",
+                      "name": "sync_inactive_billing_accounts",
+                      "label": "Sync inactive Billing Accounts"
+                    },
+                    {
+                      "tooltip": "Enable this setting to sync Billing Accounts from NetSuite to Salesforce along with NetSuite Subscription only. If unchecked Billing Accounts will be synced from NetSuite to Salesforce when they are created or updated.",
+                      "value": "false",
+                      "type": "checkbox",
+                      "name": "sync_billing_account_only_with_subscription",
+                      "label": "Sync Billing Account only with Netsuite Subscription"
+                    },
+                    {
+                      "tooltip": "Enable this setting to sync Billing Accounts from Salesforce to NetSuite automatically when they are created or updated. If unchecked, Billing Accounts will be synced from Salesforce to NetSuite when triggered using the sync button in Salesforce.",
+                      "value": "false",
+                      "type": "checkbox",
+                      "name": "automatically_sync_billing_account_from_salesforce_to_netsuite",
+                      "label": "Automatically sync Billing Account from Salesforce to Netsuite"
+                    }
+                  ],
+                  "iconURL": "/images/icons/settings/BillingAccount.png",
+                  "title": "Billing Account"
+                },
+                {
+                  "flows": [
+                    {
+                      "settings": [
+                        {
+                          "options": [
+                            [
+                              "userevent",
+                              "User Event"
+                            ],
+                            [
+                              "webservices",
+                              "Web Services"
+                            ],
+                            [
+                              "csvimport",
+                              "CSV Import"
+                            ],
+                            [
+                              "scheduled",
+                              "Scheduled"
+                            ],
+                            [
+                              "workflow",
+                              "Work Flow"
+                            ],
+                            [
+                              "userinterface",
+                              "User Interface"
+                            ]
+                          ],
+                          "value": [
+                            "webservices",
+                            "csvimport",
+                            "userinterface"
+                          ],
+                          "name": "executionContext",
+                          "type": "multiselect",
+                          "label": "Execution Context"
+                        },
+                        {
+                          "options": [
+                            [
+                              "edit",
+                              "Edit"
+                            ],
+                            [
+                              "create",
+                              "Create"
+                            ],
+                            [
+                              "xedit",
+                              "xEdit"
+                            ]
+                          ],
+                          "value": [
+                            "edit",
+                            "create",
+                            "xedit"
+                          ],
+                          "name": "executionType",
+                          "type": "multiselect",
+                          "label": "Execution Type"
+                        }
+                      ],
+                      "showMapping": true,
+                      "group": "NetSuite to Salesforce",
+                      "_id": "592d506d15336238f8325d16"
+                    },
+                    {
+                      "showSchedule": false,
+                      "showMapping": true,
+                      "group": "Salesforce to NetSuite",
+                      "_id": "592d506d15336238f8325d18"
+                    },
+                    {
+                      "showSchedule": false,
+                      "showMapping": false,
+                      "group": "Salesforce to NetSuite",
+                      "_id": "592d506dfae7551f2e4c2108"
+                    }
+                  ],
+                  "iconURL": "/images/icons/settings/PriceBook.png",
+                  "title": "Price Book"
+                },
+                {
+                  "flows": [
+                    {
+                      "settings": [
+                        {
+                          "options": [
+                            [
+                              "userevent",
+                              "User Event"
+                            ],
+                            [
+                              "webservices",
+                              "Web Services"
+                            ],
+                            [
+                              "csvimport",
+                              "CSV Import"
+                            ],
+                            [
+                              "scheduled",
+                              "Scheduled"
+                            ],
+                            [
+                              "workflow",
+                              "Work Flow"
+                            ],
+                            [
+                              "userinterface",
+                              "User Interface"
+                            ]
+                          ],
+                          "value": [
+                            "webservices",
+                            "csvimport",
+                            "userinterface"
+                          ],
+                          "name": "executionContext",
+                          "type": "multiselect",
+                          "label": "Execution Context"
+                        },
+                        {
+                          "options": [
+                            [
+                              "edit",
+                              "Edit"
+                            ],
+                            [
+                              "create",
+                              "Create"
+                            ],
+                            [
+                              "xedit",
+                              "xEdit"
+                            ]
+                          ],
+                          "value": [
+                            "edit",
+                            "create"
+                          ],
+                          "name": "executionType",
+                          "type": "multiselect",
+                          "label": "Execution Type"
+                        },
+                        {
+                          "value": "[\"custitem_celigo_sfsb_sub_plan_id\",\"empty\",true]",
+                          "name": "qualifier",
+                          "expressionType": "export",
+                          "type": "expression",
+                          "label": "Qualifier"
+                        }
+                      ],
+                      "showSchedule": false,
+                      "showMapping": true,
+                      "group": "NetSuite to Salesforce",
+                      "_id": "592d506dfae7551f2e4c2104"
+                    },
+                    {
+                      "settings": [
+                        {
+                          "options": [
+                            [
+                              "userevent",
+                              "User Event"
+                            ],
+                            [
+                              "webservices",
+                              "Web Services"
+                            ],
+                            [
+                              "csvimport",
+                              "CSV Import"
+                            ],
+                            [
+                              "scheduled",
+                              "Scheduled"
+                            ],
+                            [
+                              "workflow",
+                              "Work Flow"
+                            ],
+                            [
+                              "userinterface",
+                              "User Interface"
+                            ]
+                          ],
+                          "value": [
+                            "webservices",
+                            "csvimport",
+                            "userinterface"
+                          ],
+                          "name": "executionContext",
+                          "type": "multiselect",
+                          "label": "Execution Context"
+                        },
+                        {
+                          "options": [
+                            [
+                              "edit",
+                              "Edit"
+                            ],
+                            [
+                              "create",
+                              "Create"
+                            ],
+                            [
+                              "xedit",
+                              "xEdit"
+                            ]
+                          ],
+                          "value": [
+                            "edit",
+                            "create"
+                          ],
+                          "name": "executionType",
+                          "type": "multiselect",
+                          "label": "Execution Type"
+                        },
+                        {
+                          "value": "[\"custitem_celigo_sfsb_sub_plan_id\",\"empty\",false]",
+                          "name": "qualifier",
+                          "expressionType": "export",
+                          "type": "expression",
+                          "label": "Qualifier"
+                        }
+                      ],
+                      "showSchedule": false,
+                      "showMapping": true,
+                      "group": "NetSuite to Salesforce",
+                      "_id": "592d506dfae7551f2e4c20fb"
+                    },
+                    {
+                      "settings": [
+                        {
+                          "options": [
+                            [
+                              "userevent",
+                              "User Event"
+                            ],
+                            [
+                              "webservices",
+                              "Web Services"
+                            ],
+                            [
+                              "csvimport",
+                              "CSV Import"
+                            ],
+                            [
+                              "scheduled",
+                              "Scheduled"
+                            ],
+                            [
+                              "workflow",
+                              "Work Flow"
+                            ],
+                            [
+                              "userinterface",
+                              "User Interface"
+                            ]
+                          ],
+                          "value": [
+                            "webservices",
+                            "csvimport",
+                            "userinterface",
+                            "userevent"
+                          ],
+                          "name": "executionContext",
+                          "type": "multiselect",
+                          "label": "Execution Context"
+                        },
+                        {
+                          "options": [
+                            [
+                              "edit",
+                              "Edit"
+                            ],
+                            [
+                              "create",
+                              "Create"
+                            ],
+                            [
+                              "xedit",
+                              "xEdit"
+                            ]
+                          ],
+                          "value": [
+                            "edit",
+                            "create"
+                          ],
+                          "name": "executionType",
+                          "type": "multiselect",
+                          "label": "Execution Type"
+                        },
+                        {
+                          "value": "[\"custrecord_celigo_sfsb_subscription_id\",\"empty\",true]",
+                          "name": "qualifier",
+                          "expressionType": "export",
+                          "type": "expression",
+                          "label": "Qualifier"
+                        }
+                      ],
+                      "showSchedule": false,
+                      "showMapping": true,
+                      "group": "NetSuite to Salesforce",
+                      "_id": "592d506d15336238f8325d10"
+                    },
+                    {
+                      "settings": [
+                        {
+                          "options": [
+                            [
+                              "userevent",
+                              "User Event"
+                            ],
+                            [
+                              "webservices",
+                              "Web Services"
+                            ],
+                            [
+                              "csvimport",
+                              "CSV Import"
+                            ],
+                            [
+                              "scheduled",
+                              "Scheduled"
+                            ],
+                            [
+                              "workflow",
+                              "Work Flow"
+                            ],
+                            [
+                              "userinterface",
+                              "User Interface"
+                            ]
+                          ],
+                          "value": [
+                            "webservices",
+                            "csvimport",
+                            "userinterface"
+                          ],
+                          "name": "executionContext",
+                          "type": "multiselect",
+                          "label": "Execution Context"
+                        },
+                        {
+                          "options": [
+                            [
+                              "edit",
+                              "Edit"
+                            ],
+                            [
+                              "create",
+                              "Create"
+                            ],
+                            [
+                              "xedit",
+                              "xEdit"
+                            ]
+                          ],
+                          "value": [
+                            "edit",
+                            "create"
+                          ],
+                          "name": "executionType",
+                          "type": "multiselect",
+                          "label": "Execution Type"
+                        },
+                        {
+                          "value": "[\"custrecord_celigo_sfsb_subscription_id\",\"empty\",false]",
+                          "name": "qualifier",
+                          "expressionType": "export",
+                          "type": "expression",
+                          "label": "Qualifier"
+                        }
+                      ],
+                      "showSchedule": false,
+                      "showMapping": true,
+                      "group": "NetSuite to Salesforce",
+                      "_id": "592d506dfae7551f2e4c20ff"
+                    },
+                    {
+                      "settings": [
+                        {
+                          "options": [
+                            [
+                              "userevent",
+                              "User Event"
+                            ],
+                            [
+                              "webservices",
+                              "Web Services"
+                            ],
+                            [
+                              "csvimport",
+                              "CSV Import"
+                            ],
+                            [
+                              "scheduled",
+                              "Scheduled"
+                            ],
+                            [
+                              "workflow",
+                              "Work Flow"
+                            ],
+                            [
+                              "userinterface",
+                              "User Interface"
+                            ]
+                          ],
+                          "value": [
+                            "webservices",
+                            "csvimport",
+                            "userinterface"
+                          ],
+                          "name": "executionContext",
+                          "type": "multiselect",
+                          "label": "Execution Context"
+                        },
+                        {
+                          "options": [
+                            [
+                              "edit",
+                              "Edit"
+                            ],
+                            [
+                              "create",
+                              "Create"
+                            ],
+                            [
+                              "xedit",
+                              "xEdit"
+                            ]
+                          ],
+                          "value": [
+                            "edit",
+                            "create"
+                          ],
+                          "name": "executionType",
+                          "type": "multiselect",
+                          "label": "Execution Type"
+                        },
+                        {
+                          "value": "[\"custrecord_celigo_sfsb_sub_line_id\",\"empty\",false]",
+                          "name": "qualifier",
+                          "expressionType": "export",
+                          "type": "expression",
+                          "label": "Qualifier"
+                        }
+                      ],
+                      "showSchedule": false,
+                      "showMapping": true,
+                      "group": "NetSuite to Salesforce",
+                      "_id": "592d506dfae7551f2e4c2100"
+                    },
+                    {
+                      "showSchedule": false,
+                      "showMapping": true,
+                      "group": "Salesforce to NetSuite",
+                      "_id": "592d506d15336238f8325d19"
+                    },
+                    {
+                      "showSchedule": false,
+                      "showMapping": true,
+                      "group": "Salesforce to NetSuite",
+                      "_id": "592d506dfae7551f2e4c2103"
+                    },
+                    {
+                      "showSchedule": false,
+                      "showMapping": true,
+                      "group": "Salesforce to NetSuite",
+                      "_id": "592d506d15336238f8325d1a"
+                    }
+                  ],
+                  "fields": [
+                    {
+                      "tooltip": "Enable this setting to sync Subscription Plans from NetSuite to Salesforce along with Pricebook only. If unchecked, Subscription Plans will be synced from NetSuite to Salesforce when they are created or updated.",
+                      "type": "checkbox",
+                      "value": "false",
+                      "name": "sync_subscription_plan_only_with_pricebook",
+                      "label": "Sync Subscription Plan only with Pricebook"
+                    }
+                  ],
+                  "iconURL": "/images/icons/settings/Subscription2.png",
+                  "title": "Subscription"
+                }
+              ]
+            },
+            "version": "0.0.5"
+          }
+    },
+    "settingParams": [
+        "exports",
+        "5923923425784d5998a3ca48",
+        "executionType"
+    ]
+}

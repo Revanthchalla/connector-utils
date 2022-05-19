@@ -1,0 +1,174 @@
+{
+	"name": "Connectors of Connector",
+	"install": [{
+		"name": "NetSuite Connection",
+		"description": "Configure NetSuite account credentials",
+		"imageURL": "/images/company-logos/netsuite.png",
+		"completed": false,
+		"installerFunction": "verifyNetSuiteConnection",
+		"uninstallerFunction": "deleteNetSuiteConnection"
+	},
+	{
+		"name": "Magento Connection",
+		"description": "Configure Magento 2 store credentials",
+		"imageURL": "/images/company-logos/magento.png",
+		"completed": false,
+		"installerFunction": "verifyMagentoConnection",
+		"uninstallerFunction": "deleteMagentoConnection"
+	},
+	{
+		"name": "Integrator Bundle",
+		"description": "Install Integrator Bundle in NetSuite",
+		"imageURL": "/images/company-logos/netsuite.png",
+		"installURL": "",
+		"completed": false,
+		"installerFunction": "verifyIntegratorBundleInstallation",
+		"uninstallerFunction": "uninstallVerifyIntegratorBundle"
+	},
+	{
+		"name": "Magento Bundle",
+		"description": "Install Magento 2 Bundle in NetSuite",
+		"imageURL": "/images/company-logos/netsuite.png",
+		"installURL": "",
+		"completed": false,
+		"installerFunction": "verifyMagentoBundleInstallation",
+		"uninstallerFunction": "uninstallVerifyMagentoBundle"
+	}],
+	"mode": "install",
+	"settings": {
+		"commonresources": {
+			"netsuiteConnectionId": "nsConnectionId"
+		},
+		"sections": [{
+			"title": "Inventory",
+			"columns": 1,
+			"flows": [{
+				"_id": "571094f0d750917c1b6805bb",
+				"showMapping": true,
+				"showSchedule": true
+			}],
+			"fields": [{
+				"label": "NetSuite Saved Search for syncing inventory levels",
+				"value": "customsearch5497",
+				"type": "select",
+				"name": "exports_exportId_savedSearch_listSavedSearches",
+				"supportsRefresh": true,
+				"options": [["customsearch5497",
+				"Celigo Magento 2 Inventory Export Search"]]
+			}]
+		},
+		{
+			"title": "Order",
+			"columns": 1,
+			"flows": [{
+				"_id": "590c46b3a0138d3023f392bc",
+				"showMapping": true,
+				"showSchedule": true
+			}],
+			"sections": [{
+				"title": "Shipping",
+				"fields": [{
+					"generates": [{
+						"text": "Airborne",
+						"id": "2"
+					},
+					{
+						"text": "FedEx",
+						"id": "3"
+					},
+					{
+						"text": "UPS",
+						"id": "4"
+					}],
+					"default": "4",
+					"allowFailures": true,
+					"supportsGeneratesRefresh": true,
+					"supportsExtractsRefresh": false,
+					"generateFieldHeader": "NetSuite Ship Method",
+					"extractFieldHeader": "BigCommerce Ship Method",
+					"label": "Ship Method Mapping",
+					"tooltip": "Lets you map the shipping methods between BigCommerce and NetSuite. You can also provide a default value in case no match is found.",
+					"title": "Map Ship Methods",
+					"name": "imports_importid_shipmethodLookup_dummyExtractsMethod_listShipMethods",
+					"type": "staticMapWidget",
+					"map": {
+						"fedex": "4"
+					}
+				},{
+					"type": "staticMapWidget",
+					"title": "Map Customer Group With Netsuite Price Level",
+					"label": "Magento Tier Pricing Mapping",
+					"tooltip": "Lets you map the Magento 2 customer groups(group ids) to NetSuite price levels(internal ids) for exporting qty based pricing in NetSuite to Magento 2 tier price levels",
+					"hideLookupAllowFailures": true,
+					"default": "",
+					"optionsMap": [
+						{
+							"id": "websites_listWebsites",
+							"label": "Magento 2 Websites",
+							"type": "select",
+							"supportsRefresh": true
+						},
+						{
+							"id": "customergroup_listCustomerGroup",
+							"label": "Magento 2 Customer Groups",
+							"required": true,
+							"type": "select",
+							"supportsRefresh": true
+						},
+						{
+							"id": "shipmethod_listShipMethods",
+							"label": "NetSuite Price Levels",
+							"required": true,
+							"type": "select",
+							"supportsRefresh": true
+						}
+					],
+					"name": "imports_importid_shipmethodLookup_listshipmethod",
+					"value": [
+						{
+							"pricelevel_listPriceLevels": "2",
+							"customergroup_listCustomerGroup": "1",
+							"websites_listWebsites": "1"
+						},
+						{
+							"pricelevel_listPriceLevels": "4",
+							"customergroup_listCustomerGroup": "3",
+							"websites_listWebsites": "2"
+						}
+					]
+				}]
+			},
+            {
+				"title": "Payment",
+				"fields": [{
+					"generates": [{
+						"text": "Airborne",
+						"id": "2"
+					},
+					{
+						"text": "FedEx",
+						"id": "3"
+					},
+					{
+						"text": "UPS",
+						"id": "4"
+					}],
+					"default": "4",
+					"allowFailures": true,
+					"supportsGeneratesRefresh": true,
+					"supportsExtractsRefresh": false,
+					"generateFieldHeader": "NetSuite Payment Method",
+					"extractFieldHeader": "BigCommerce Payment Method",
+					"label": "Payment Method Mapping",
+					"tooltip": "Lets you map the Payment methods between BigCommerce and NetSuite. You can also provide a default value in case no match is found.",
+					"title": "Map Payment Methods",
+					"name": "imports_importid_paymentmethodLookup_listPaymentMethods",
+					"type": "staticMapWidget",
+					"map": {
+						"fedex": "4"
+					}
+				}]
+			}]
+		}]
+	}
+}

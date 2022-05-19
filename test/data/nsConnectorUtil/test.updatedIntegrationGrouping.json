@@ -1,0 +1,85 @@
+{
+    "name": "Connectors of Connector",
+    "install": [
+        {
+            "name": "NetSuite Connection",
+            "description": "Configure NetSuite account credentials",
+            "imageURL": "/images/company-logos/netsuite.png",
+            "completed": false,
+            "installerFunction": "verifyNetSuiteConnection",
+            "uninstallerFunction": "deleteNetSuiteConnection"
+        },
+        {
+            "name": "Magento Connection",
+            "description": "Configure Magento 2 store credentials",
+            "imageURL": "/images/company-logos/magento.png",
+            "completed": false,
+            "installerFunction": "verifyMagentoConnection",
+            "uninstallerFunction": "deleteMagentoConnection"
+        },
+        {
+            "name": "Integrator Bundle",
+            "description": "Install Integrator Bundle in NetSuite",
+            "imageURL": "/images/company-logos/netsuite.png",
+            "installURL": "",
+            "completed": false,
+            "installerFunction": "verifyIntegratorBundleInstallation",
+            "uninstallerFunction": "uninstallVerifyIntegratorBundle"
+        },
+        {
+            "name": "Magento Bundle",
+            "description": "Install Magento 2 Bundle in NetSuite",
+            "imageURL": "/images/company-logos/netsuite.png",
+            "installURL": "",
+            "completed": false,
+            "installerFunction": "verifyMagentoBundleInstallation",
+            "uninstallerFunction": "uninstallVerifyMagentoBundle"
+        }
+    ],
+    "mode": "install",
+    "settings": {
+        "commonresources": {
+            "netsuiteConnectionId": "nsConnectionId"
+        },
+        "sections":
+        [
+          {
+            "title": "Inventory",
+            "columns": 1,
+            "flows":
+              [
+                {
+                  "_id": "571094f0d750917c1b6805bb",
+                  "showMapping": true,
+                  "showSchedule": true
+                }
+              ],
+              "sections" : [
+                {
+                  "fields":
+                    [
+                      {
+                        "label": "NetSuite Saved Search for syncing inventory levels",
+                        "value": "customsearch5497",
+                        "type": "select",
+                        "name": "exports_exportId_savedSearch_listSavedSearches",
+                        "supportsRefresh": true,
+                        "options":
+                          [
+                              [
+                                  "298",
+                                  " Case Issue Summary"
+                              ],
+                              [
+                                  "18",
+                                  " New Corporate Leads"
+                              ]
+                          ]
+                      }
+                    ]
+                  }
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,218 @@
+{
+    "oldSettings": {
+        "exports_exportId_savedSearch_refreshItemSeaches": {
+            "label": "NetSuite Saved Search for syncing item fulfillments",
+            "value": "customsearch_celigo_mag2_fulfill_export",
+            "type": "select",
+            "name": "exports_exportId_savedSearch_refreshItemSeaches",
+            "supportsRefresh": true,
+            "options": [
+                [
+                    "customsearch_celigo_mag2_fulfill_export",
+                    "Celigo Magento 2 Fulfillment Export Search"
+                ],
+                [
+                    "customsearch_celigo_mag2_fulfill_export1",
+                    "Celigo Magento 2 Fulfillment Export Search1"
+                ]
+            ]
+        },
+        "exports_570b875e5fa1ca9836740a09_savedSearch_refreshItemSeaches": {
+            "label": "NetSuite Saved Search for syncing inventory levels",
+            "value": "customsearch_celigo_mag2_inv_exp_search",
+            "type": "select",
+            "name": "exports_570b875e5fa1ca9836740a09_savedSearch_refreshItemSeaches",
+            "supportsRefresh": true,
+            "options": [
+                [
+                    "customsearch_celigo_mag2_inv_exp_search",
+                    "Celigo Magento 2 Inventory Export Search"
+                ]
+            ]
+        }
+    },
+    "newSettings": {
+        "exports_exportId_savedSearch_refreshItemSeaches": "customsearch_celigo_mag2_fulfill_export1"
+    },
+    "setting": "exports_exportId_savedSearch_refreshItemSeaches",
+    "options": {
+        "pending": {
+            "exports_exportId_savedSearch_refreshItemSeaches": "customsearch_celigo_mag2_fulfill_export1"
+        },
+        "_integrationId": "570b867a5fa1ca98367409fc",
+        "bearerToken": "ott8c35367e26394ef08bee9ee67f41d576",
+        "integrationRecord": {
+            "_id": "570b867a5fa1ca98367409fc",
+            "lastModified": "2016-04-12T10:27:28.050Z",
+            "name": "Magento 2 - NetSuite Connector",
+            "_connectorId": "56c5e0f306d27b0033473f1a",
+            "install": [
+                {
+                    "name": "NetSuite Connection",
+                    "description": "Configure NetSuite account credentials",
+                    "imageURL": "/images/company-logos/netsuite.png",
+                    "completed": true,
+                    "installerFunction": "verifyNetSuiteConnection",
+                    "uninstallerFunction": "deleteNetSuiteConnection",
+                    "_connectionId": "570b867c5fa1ca98367409ff"
+                },
+                {
+                    "name": "Magento Connection",
+                    "description": "Configure Magento 2 store credentials",
+                    "imageURL": "/images/company-logos/magento.png",
+                    "completed": true,
+                    "installerFunction": "verifyMagentoConnection",
+                    "uninstallerFunction": "deleteMagentoConnection",
+                    "_connectionId": "570b867c5fa1ca98367409fe"
+                },
+                {
+                    "name": "Integrator Bundle",
+                    "description": "Install Integrator Bundle in NetSuite",
+                    "imageURL": "/images/company-logos/netsuite.png",
+                    "installURL": "https://system.na1.netsuite.com/app/bundler/bundledetails.nl?sourcecompanyid=TSTDRV840460&domain=PRODUCTION&config=F&id=20037",
+                    "completed": true,
+                    "installerFunction": "verifyIntegratorBundleInstallation",
+                    "uninstallerFunction": "uninstallVerifyIntegratorBundle"
+                },
+                {
+                    "name": "Magento Bundle",
+                    "description": "Install Magento 2 Bundle in NetSuite",
+                    "imageURL": "/images/company-logos/netsuite.png",
+                    "installURL": "https://system.na1.netsuite.com/app/bundler/bundledetails.nl?sourcecompanyid=TSTDRV840460&domain=PRODUCTION&config=F&id=114244",
+                    "completed": true,
+                    "installerFunction": "verifyMagentoBundleInstallation",
+                    "uninstallerFunction": "uninstallVerifyMagentoBundle"
+                }
+            ],
+            "mode": "settings",
+            "settings": {
+                "commonresources": {
+                    "netsuiteConnectionId": "570b867c5fa1ca98367409ff",
+                    "magentoConnectionId": "570b867c5fa1ca98367409fe",
+                    "shopInstallComplete": "true",
+                    "apiIdentifierCustomerImport": "i0f10986cf",
+                    "shipmentTrackingNumberExportId": "570b875a5fa1ca9836740a06"
+                },
+                "sections": [
+                    {
+                        "title": "General",
+                        "columns": 1,
+                        "flows": [
+                            {
+                                "_id": "570b87615fa1ca9836740a1d",
+                                "showMapping": true,
+                                "showSchedule": true
+                            },
+                            {
+                                "_id": "570b87615fa1ca9836740a1e",
+                                "showMapping": true,
+                                "showSchedule": true
+                            },
+                            {
+                                "_id": "570b87615fa1ca9836740a23",
+                                "showMapping": true,
+                                "showSchedule": true
+                            },
+                            {
+                                "_id": "570b87615fa1ca9836740a20",
+                                "showMapping": true,
+                                "showSchedule": true
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Order",
+                        "columns": 1,
+                        "flows": [
+                            {
+                                "_id": "570b87615fa1ca9836740a1c",
+                                "showMapping": true,
+                                "showSchedule": true
+                            },
+                            {
+                                "_id": "570b87615fa1ca9836740a1f",
+                                "showMapping": true,
+                                "showSchedule": false,
+                                "disableSlider": true
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Fulfillment",
+                        "columns": 1,
+                        "flows": [
+                            {
+                                "_id": "570b87615fa1ca9836740a1a",
+                                "showMapping": true,
+                                "showSchedule": true
+                            },
+                            {
+                                "disableSlider": true,
+                                "_id": "570b87615fa1ca9836740a1b",
+                                "showMapping": true,
+                                "showSchedule": true
+                            }
+                        ],
+                        "fields": [
+                            {
+                                "label": "NetSuite Saved Search for syncing item fulfillments",
+                                "value": "customsearch_celigo_mag2_fulfill_export",
+                                "type": "select",
+                                "name": "exports_exportId_savedSearch_refreshItemSeaches",
+                                "supportsRefresh": true,
+                                "options": [
+                                    [
+                                        "customsearch_celigo_mag2_fulfill_export",
+                                        "Celigo Magento 2 Fulfillment Export Search"
+                                    ],
+                                    [
+                                        "customsearch_celigo_mag2_fulfill_export1",
+                                        "Celigo Magento 2 Fulfillment Export Search1"
+                                    ]
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Inventory",
+                        "columns": 1,
+                        "flows": [
+                            {
+                                "_id": "570b87615fa1ca9836740a21",
+                                "showMapping": true,
+                                "showSchedule": true
+                            },
+                            {
+                                "_id": "570b87615fa1ca9836740a22",
+                                "showMapping": true,
+                                "showSchedule": true
+                            }
+                        ],
+                        "fields": [
+                            {
+                                "label": "NetSuite Saved Search for syncing inventory levels",
+                                "value": "customsearch_celigo_mag2_inv_exp_search",
+                                "type": "select",
+                                "name": "exports_570b875e5fa1ca9836740a09_savedSearch_refreshItemSeaches",
+                                "supportsRefresh": true,
+                                "options": [
+                                    [
+                                        "customsearch_celigo_mag2_inv_exp_search",
+                                        "Celigo Magento 2 Inventory Export Search"
+                                    ]
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "version": "0.0.1"
+        }
+    },
+    "settingParams": [
+        "exports",
+        "exportId",
+        "savedSearch",
+        "refreshItemSeaches"
+    ]
+}

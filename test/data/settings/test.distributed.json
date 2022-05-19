@@ -1,0 +1,26 @@
+{
+  "_id": "5923923425784d5998a3ca48",
+  "_userId": "5908656c7363a427953ab451",
+  "recordType": "billingschedule",
+  "executionContext": [
+    "userinterface",
+    "webservices",
+    "csvimport"
+  ],
+  "executionType": [
+    "create",
+    "edit"
+  ],
+  "qualifier": [
+    "text: scheduletype",
+    "=",
+    "Charge-Based"
+  ],
+  "fileInternalId": null,
+  "function": "hook.billingSchedulePreSendHook",
+  "configuration": null,
+  "sublists": null,
+  "forceReload": false,
+  "disabled": false,
+  "settings": {}
+}

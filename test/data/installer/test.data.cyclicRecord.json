@@ -1,0 +1,14 @@
+{ "node1":
+    { "dependson": ["node3"]
+    , "filelocation": ""
+    }
+, "node2":
+    { "dependson": []
+    , "filelocation": ""
+    }
+, "node3":
+    { "name": "node3"
+    , "filelocation": ""
+    , "dependson": ["node1", "node2"]
+    }
+}

@@ -1,0 +1,101 @@
+{
+    "flows_flowId_enable": {
+        "label": "Enable adding NetSuite fulfillments as Shopify fulfillments",
+        "type": "checkbox",
+        "name": "flows_flowId_enable",
+        "value": false
+    },
+    "flows_flowId_toggleWebhook": {
+        "label": "Enable adding Shopify orders as NetSuite orders",
+        "type": "checkbox",
+        "name": "flows_flowId_toggleWebhook",
+        "value": true
+    },
+    "exports_exportId_registerWebhook": {
+        "label": "Add web orders into NetSuite",
+        "value": "authorize",
+        "type": "select",
+        "name": "exports_exportId_registerWebhook",
+        "required": true,
+        "options": [
+            [
+                "authorize",
+                "When they are Authorized in Shopify"
+            ],
+            [
+                "capture",
+                "When they are Captured in Shopify"
+            ]
+        ]
+    },
+    "exports_exportId_setFieldValues": {
+        "label": "Add web orders into NetSuite",
+        "value": "authorize",
+        "type": "select",
+        "name": "exports_exportId_setFieldValues",
+        "required": true,
+        "options": [
+            [
+                "authorize",
+                "When they are Authorized in Shopify"
+            ],
+            [
+                "capture",
+                "When they are Captured in Shopify"
+            ]
+        ]
+    },
+    "imports_importId_shipmethodLookup_dummyExtractsMethod_listShipMethods": {
+        "map": {
+            "fedex": "4"
+        },
+        "generates": [
+            {
+                "text": "Airborne",
+                "id": "2"
+            },
+            {
+                "text": "FedEx",
+                "id": "3"
+            },
+            {
+                "text": "UPS",
+                "id": "4"
+            }
+        ],
+        "default": "4",
+        "allowFailures": true,
+        "supportsGeneratesRefresh": true,
+        "supportsExtractsRefresh": false,
+        "generateFieldHeader": "NetSuite Ship Method",
+        "extractFieldHeader": "Magento 2 Ship Method",
+        "label": "Ship Method Mapping",
+        "tooltip": "Lets you map the shipping methods between Magento 2 and NetSuite. You can also provide a default value in case no match is found.",
+        "title": "Map Ship Methods",
+        "name": "imports_importId_shipmethodLookup_dummyExtractsMethod_listShipMethods",
+        "type": "staticMapWidget"
+    },
+    "flows_flowId_enable": {
+        "name": "flows_flowId_enable",
+        "value": "test"
+    },
+    "flows_56b89c602c274b101c8ebd9c_enable": {
+        "label": "Enable updating NetSuite inventory levels in Shopify",
+        "type": "checkbox",
+        "name": "flows_56b89c602c274b101c8ebd9c_enable",
+        "value": false
+    },
+    "exports_exportId_savedSearch_refreshItemSeaches": {
+        "label": "NetSuite Saved Search for syncing inventory levels",
+        "value": "customsearch16085",
+        "type": "select",
+        "name": "exports_exportId_savedSearch_refreshItemSeaches",
+        "supportsRefresh": true,
+        "options": [
+            [
+                "customsearch16085",
+                "Celigo Shopify Inventory Export [Store-US] Store"
+            ]
+        ]
+    }
+}

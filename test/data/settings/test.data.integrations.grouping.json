@@ -1,0 +1,299 @@
+{
+    "_id" : "5857d5f4a45dba400c41a0bd",
+    "_connectorId" : "57b2a7b3f36d284c22d06de5",
+    "name" : "Walmart - NetSuite Connector",
+    "install" : [
+        {
+            "name" : "NetSuite Connection",
+            "description" : "Configure NetSuite account credentials",
+            "imageURL" : "/images/company-logos/netsuite.png",
+            "completed" : true,
+            "installerFunction" : "verifyNetSuiteConnection",
+            "_connectionId" : "netsuiteConnectionId"
+        },
+        {
+            "name" : "Walmart Connection",
+            "description" : "Configure Walmart marketplace credentials",
+            "imageURL" : "/images/company-logos/walmart.png",
+            "completed" : true,
+            "installerFunction" : "verifyProductConnection",
+            "_connectionId" : "walmartConnectionId"
+        },
+        {
+            "name" : "Integrator Bundle",
+            "description" : "Install Integrator Bundle in NetSuite",
+            "imageURL" : "/images/company-logos/netsuite.png",
+            "installURL" : "https://system.na1.netsuite.com/app/bundler/bundledetails.nl?sourcecompanyid=TSTDRV916910&domain=PRODUCTION&config=F&id=20038",
+            "completed" : true,
+            "installerFunction" : "verifyIntegratorBundleInstallation"
+        },
+        {
+            "name" : "Walmart Bundle",
+            "description" : "Install Walmart Bundle in NetSuite",
+            "imageURL" : "/images/company-logos/netsuite.png",
+            "installURL" : "https://system.na1.netsuite.com/app/bundler/bundledetails.nl?sourcecompanyid=TSTDRV840460&domain=PRODUCTION&config=F&id=136333",
+            "completed" : true,
+            "installerFunction" : "verifyProductBundleInstallation"
+        }
+    ],
+    "lastModified" : "2016-12-20T14:19:18.956+0000",
+    "__v" : 23,
+    "mode" : "settings",
+    "settings" : {
+        "sections" : [
+            {
+                "sections" : [
+                    {
+                        "fields" : [
+                            {
+                                "value" : "",
+                                "name" : "exports_5857d827a45dba400c41a0dd_invokeOnDemandOrderImport",
+                                "type" : "text",
+                                "tooltip" : "Provide a single or multiple comma-separated Walmart order ids and click on 'Save' button to on-demand import of orders from Walmart into NetSuite. The max number of order ids that should be specified at a time is 10.",
+                                "label" : "Walmart Order Id(s)"
+                            },
+                            {
+                                "value" : false,
+                                "name" : "exports_5857d827a45dba400c41a0dd_autoAcknowledgeOnDemandOrders",
+                                "type" : "checkbox",
+                                "tooltip" : "If checked, connector auto acknowledges orders that are imported using the 'Walmart Order Id(s)'. Recommended approach is to keep this box unchecked before you go live with the connector & keep it checked once live in Production.",
+                                "label" : "Auto Acknowledge On Demand Orders"
+                            },
+                            {
+                                "value" : "2016-11-26T18:30:00.000Z",
+                                "name" : "exports_5857d827a45dba400c41a0d5_orderStartDateFilter",
+                                "type" : "datetime",
+                                "tooltip" : "Lets you define the order creation date in Walmart only after which the orders should be imported into NetSuite.",
+                                "label" : "Add orders created after"
+                            }
+                        ],
+                        "title" : "Orders"
+                    },
+                    {
+                        "fields" : [
+                            {
+                                "map" : {},
+                                "type" : "staticMapWidget",
+                                "name" : "imports_orderImportAdaptorId_shipmethodLookup_listWalmartShipMethods_listShipMethods",
+                                "title" : "Map Ship Methods",
+                                "tooltip" : "Lets you map the shipping methods between Walmart and NetSuite. You can also provide a default value in case no match is found.",
+                                "label" : "Ship Method Mapping",
+                                "extractFieldHeader" : "Walmart Ship Method",
+                                "generateFieldHeader" : "NetSuite Ship Method",
+                                "supportsExtractsRefresh" : true,
+                                "supportsGeneratesRefresh" : true,
+                                "allowFailures" : true,
+                                "default" : "",
+                                "extracts" : [null],
+                                "generates" : [null
+                                ]
+                            }
+                        ],
+                        "title" : "Shipping"
+                    },
+                    {
+                        "fields" : [
+                            {
+                                "value" : "1397",
+                                "name" : "imports_orderImportAdaptorId_setDefaultCustomerId",
+                                "type" : "input",
+                                "tooltip" : "Provide the internal id of the default customer record in NetSuite if you prefer to skip the creation of new customer records in NetSuite for each new order from Walmart and assign a default customer record to all the Walmart orders.",
+                                "label" : "Default NetSuite customer for all Walmart orders"
+                            }
+                        ],
+                        "title" : "Customers"
+                    }
+                ],
+                "flows" : [
+                    {
+                        "showSchedule" : true,
+                        "showMapping" : true,
+                        "_id" : "5857d82fa45dba400c41a0e3"
+                    },
+                    {
+                        "showSchedule" : false,
+                        "showMapping" : false,
+                        "_id" : "orderAckFlowId"
+                    },
+                    {
+                        "disableSlider" : true,
+                        "showSchedule" : false,
+                        "showMapping" : true,
+                        "_id" : "5857d82fa45dba400c41a0e5"
+                    }
+                ],
+                "title" : "Order"
+            },
+            {
+                "fields" : [
+                    {
+                        "options" : [
+                            [
+                                "96397",
+                                "Celigo Walmart Fulfillment Export Search"
+                            ]
+                        ],
+                        "supportsRefresh" : true,
+                        "name" : "exports_5857d82ba45dba400c41a0e0_savedSearch_listSavedSearches",
+                        "type" : "select",
+                        "value" : "96397",
+                        "required" : true,
+                        "label" : "Select the NetSuite saved search for syncing item fulfillments"
+                    },
+                    {
+                        "type" : "staticMapWidget",
+                        "name" : "imports_5857d827a45dba400c41a0d9_shipmethodLookupForFulfillment_listShipMethodsWithoutIds_listWalmartShipMethods",
+                        "title" : "Map Ship Methods",
+                        "tooltip" : "Lets you map the shipping methods between Walmart and NetSuite. You can also provide a default value in case no match is found.",
+                        "label" : "Ship Method Mapping",
+                        "extractFieldHeader" : "NetSuite Ship Method",
+                        "generateFieldHeader" : "Walmart Ship Method",
+                        "supportsExtractsRefresh" : true,
+                        "supportsGeneratesRefresh" : true,
+                        "allowFailures" : false,
+                        "default" : "",
+                        "extracts" : [
+                            null
+                        ],
+                        "generates" : [
+                            null
+                        ]
+                    },
+                    {
+                        "value" : true,
+                        "name" : "imports_5857d827a45dba400c41a0d9_autoCarrierLookupEnabled",
+                        "type" : "checkbox",
+                        "tooltip" : "When enabled, the shipping methods in NetSuite are automatically mapped to shipping carriers in Walmart.  Else the mapping has to be done manually using field mappings page.",
+                        "label" : "Automate shipment carrier mapping"
+                    }
+                ],
+                "flows" : [
+                    {
+                        "showSchedule" : true,
+                        "showMapping" : true,
+                        "_id" : "5857d82fa45dba400c41a0e6"
+                    }
+                ],
+                "columns" : 1,
+                "title" : "Fulfillment"
+            },
+            {
+                "fields" : [
+                    {
+                        "options" : [
+                            [
+                                "96497",
+                                "Celigo Walmart Inventory Export Search"
+                            ]
+                        ],
+                        "supportsRefresh" : true,
+                        "name" : "exports_5857d82ba45dba400c41a0df_savedSearch_listSavedSearches_inv",
+                        "type" : "select",
+                        "value" : "96497",
+                        "required" : true,
+                        "label" : "Select the NetSuite saved search for syncing inventory levels"
+                    },
+                    {
+                        "options" : [
+                            [
+                                "96297",
+                                "Celigo Walmart Kit Items Inventory Export Search"
+                            ]
+                        ],
+                        "supportsRefresh" : true,
+                        "name" : "exports_5857d82ba45dba400c41a0e1_savedSearch_listSavedSearches_kit",
+                        "type" : "select",
+                        "value" : "96297",
+                        "required" : true,
+                        "label" : "Select the NetSuite saved search for syncing inventory levels for Kit Items"
+                    },
+                    {
+                        "label" : "Always sync inventory levels for entire catalog",
+                        "tooltip" : "Syncs inventory for all the NetSuite items linked to Walmart, every time inventory export data flow runs.",
+                        "type" : "checkbox",
+                        "name" : "exports_5857d82ba45dba400c41a0df_toggleNetsuiteExportType_lastquantityavailablechange",
+                        "value" : false
+                    },
+                    {
+                        "tooltip" : "Inventory export data flow picks the inventory (for all the NetSuite items linked to Walmart) from the chosen NetSuite locations and syncs/exports it to Walmart. If multiple locations are selected, the inventory from all these locations is added to the total and synced to Walmart.",
+                        "name" : "exports_5857d82ba45dba400c41a0df_updateMultipleSavedSearchLocationFilters_listLocations",
+                        "label" : "NetSuite locations to pick inventory from",
+                        "type" : "multiselect",
+                        "required" : false,
+                        "supportsRefresh" : true,
+                        "options" : [
+                            null
+                        ]
+                    },
+                    {
+                        "label" : "Calculate Kit Inventory per Location",
+                        "tooltip" : "If enabled, connector will first calculate sellable inventory of kit per location using quantity of each member item, and then will send the sum of all the sellable quantities across all the locations. If disabled, connector will first calculate the total inventory for each member items across all the locations, and then will calculate inventory for a kit.",
+                        "type" : "checkbox",
+                        "name" : "exports_5857d82ba45dba400c41a0e1_kitInventoryCalculationPerLocationEnabled",
+                        "value" : true
+                    }
+                ],
+                "flows" : [
+                    {
+                        "showSchedule" : true,
+                        "showMapping" : true,
+                        "_id" : "5857d82fa45dba400c41a0e4"
+                    },
+                    {
+                        "showSchedule" : true,
+                        "showMapping" : true,
+                        "_id" : "5857d82fa45dba400c41a0e7"
+                    }
+                ],
+                "columns" : 1,
+                "title" : "Inventory"
+            },
+            {
+                "fields" : [
+                    {
+                        "options" : [
+                            [
+                                "96197",
+                                "Celigo Walmart Pricing Export Search"
+                            ]
+                        ],
+                        "supportsRefresh" : true,
+                        "name" : "exports_5857d82ba45dba400c41a0e2_savedSearch_listSavedSearches",
+                        "type" : "select",
+                        "value" : "96197",
+                        "required" : true,
+                        "label" : "Select the NetSuite saved search for syncing item pricing details"
+                    },
+                    {
+                        "supportsRefresh" : true,
+                        "name" : "exports_5857d82ba45dba400c41a0e2_updateSearchPricingFilters_listPriceLevels",
+                        "type" : "select",
+                        "value" : null,
+                        "tooltip" : "Lets you choose the NetSuite price level to be used for exporting the price to Walmart.",
+                        "required" : false,
+                        "label" : "NetSuite price level for syncing product price"
+                    }
+                ],
+                "flows" : [
+                    {
+                        "showSchedule" : true,
+                        "showMapping" : true,
+                        "_id" : "5857d82fa45dba400c41a0e8"
+                    }
+                ],
+                "columns" : 1,
+                "title" : "Pricing"
+            }
+        ],
+        "commonresources" : {
+            "onDemandOrderImportFlowId" : "onDemandOrderImportFlowId",
+            "orderImportAdaptorId" : "orderImportAdaptorId",
+            "orderAckFlowId" : "orderAckFlowId",
+            "apiIdentifierCustomerImport" : "apiIdentifierCustomerImport",
+            "orderAckFlowExportId" : "orderAckFlowExportId",
+            "walmartConnectionId" : "walmartConnectionId",
+            "netsuiteConnectionId" : "netsuiteConnectionId"
+        }
+    },
+    "version" : "1.2.1"
+}

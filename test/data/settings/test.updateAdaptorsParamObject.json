@@ -1,0 +1,62 @@
+{
+	"oldSettings": {
+		"general_dummy_connectionMap": {
+			"default": "596e257e21a886220891d315",
+			"generates": [{
+					"text": "Production Connection",
+					"id": "596e15cf21a886220891d2a9"
+				}, {
+					"text": "Staging Connection",
+					"id": "596e257e21a886220891d315"
+				}
+			],
+			"extracts": [{
+					"text": "Commerce Cloud Order to NetSuite Order Add",
+					"id": "596e17a221a886220891d2c1"
+				}, {
+					"text": "NetSuite Fulfillment to Commerce Cloud Shipment Add",
+					"id": "596e17a221a886220891d2ca"
+				}, {
+					"text": "NetSuite Inventory to Commerce Cloud Inventory Add/Update",
+					"id": "596e17a221a886220891d2cd"
+				}, {
+					"text": "NetSuite Item to Commerce Cloud Product Add/Update",
+					"id": "596e17a221a886220891d2cb"
+				}, {
+					"text": "NetSuite Pricing to Commerce Cloud Pricing Add/Update",
+					"id": "596e17a221a886220891d2c4"
+				}
+			],
+			"allowFailures": true,
+			"generateFieldHeader": "SFCC Connection",
+			"extractFieldHeader": "Flow Name",
+			"label": "Connection flow map",
+			"tooltip": "Connection Map",
+			"title": "Map Flows with Connections",
+			"name": "general_dummy_connectionMap",
+			"type": "staticMapWidget",
+			"map": {
+				"596e17a221a886220891d2ca": "596e257e21a886220891d315"
+			}
+		}
+	},
+	"newSettings": {
+		"general_dummy_connectionMap": {
+			"map": {
+				"596e17a221a886220891d2ca": "596e257e21a886220891d315"
+			},
+			"default": "596e15cf21a886220891d2a9",
+			"allowFailures": true
+		}
+	},
+	"setting": "general_dummy_connectionMap",
+	"options": {
+		"bearerToken": "ott9427eb3e88494c7094a6c84a278c97c8"
+	},
+	"settingParams": ["general", "dummy", "connectionMap"],
+	"staticMapConfig": {
+		"updateAdaptorsWithConnections": true,
+		"validateValues": true,
+		"validAdaptors": ["demandware-orders-export-adaptor", "demandware-cancelOrder-import-adaptor", "demandware-inventory-import-adaptor", "sfcc-item-import-adaptor", "demandware-price-book-import-adaptor"]
+	}
+}
